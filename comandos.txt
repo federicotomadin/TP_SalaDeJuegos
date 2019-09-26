@@ -1,0 +1,13 @@
+comandos
+
+
+
+npm install @angular/http@latest
+npm install @angular/animations@latest
+
+ng update @angular/cli --allow-dirty
+npm update --save
+npm install -g 
+npm-install-peers
+
+npm install @angular/platform-browser@latest
