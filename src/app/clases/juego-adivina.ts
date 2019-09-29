@@ -10,7 +10,7 @@ export class JuegoAdivina extends  Juego {
 
       }
     public verificar() {
-        if (this.numeroIngresado === this.numeroSecreto) {
+        if (this.numeroIngresado == this.numeroSecreto) {
           this.gano = true;
         }
         if (this.gano) {
