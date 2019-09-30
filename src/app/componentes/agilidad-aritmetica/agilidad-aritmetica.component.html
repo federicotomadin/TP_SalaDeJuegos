@@ -1,40 +1,61 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<!--app-menu></app-menu-->
-<!-- index.html -->
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+<link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400" />
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('id02');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 
 
-<form name="juego">
+<div id="id02" class="modal">
+    <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
+    <form class="modal-content animate">
+        <div class="container">
+            <h3 id="mensajeModal">{{mensajeResultado}}</h3>
+
+            <div class="clearfix">
+                <a type="button" class="btn" onclick="document.getElementById('id02').style.display='none'">Volver al juego</a>
+                <a type="button" class="btn" routerLink="/Principal">Ir a menu de inicio</a>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+<h1>
+    {{nombreJuego}}!
+</h1>
+
+<div class="formJuego">
     <ul>
-        <li>
-            Primer número: <input (ngModel)="nuevoJuego.numeroIngresado" placeholder="ingrese numero" name="numeroIngresado" type="text" class="form-control" style="width:50%" />
 
-        </li>
-        <li>
-            Operador: <input (ngModel)="nuevoJuego.numeroIngresado" placeholder="ingrese numero" name="numeroIngresado" type="text" class="form-control" style="width:50%" />
+        <h4>Primer Número: {{this.pNumero}}</h4>
+        <h4>Operación: {{this.sOperador}}</h4>
+        <h4>Segundo Número: {{this.sNumero}}</h4>
 
-        </li>
-        <li>
-            Segundo número: <input (ngModel)="nuevoJuego.numeroIngresado" placeholder="ingrese numero" name="numeroIngresado" type="text" class="form-control" style="width:50%" />
+        Respuesta: <input [(ngModel)]="this.respuesta" placeholder="ingrese numero" name="numeroIngresado" type="text" class="form-control" style="width:50%" />
 
-        </li>
-        <li>
-            Respuesta: <input [(ngModel)]="nuevoJuego.numeroIngresado" placeholder="ingrese numero" name="numeroIngresado" type="text" class="form-control" style="width:50%" />
+        <h2 [hidden]="ocultarVerificar"><a (click)="verificar()" class="btn btn-success btn-lg">Verificar {{Tiempo}} </a></h2>
 
-        </li>
-        <li>
-            <h2 [hidden]="ocultarVerificar"><button (click)="verificar()" class="btn btn-success btn-lg">Verificar {{Tiempo}} </button></h2>
-        </li>
-        <li>
-            <h2 [hidden]="!ocultarVerificar"><button (click)="NuevoJuego()" class="btn btn-info btn-lg">Nuevo</button></h2>
-        </li>
-        <li>
-            <h2>
-                <p><i class="fa fa-spinner fa-spin"></i>Esperando numero...</p>
-            </h2>
+        <h2 [hidden]="!ocultarVerificar"><a (click)="NuevoJuego()" class="btn btn-info btn-lg">Nuevo</a></h2>
 
-            <h3 [hidden]="!nuevoJuego.gano">usted adivino el número</h3>
-            <h3 [hidden]="nuevoJuego.gano">usted aún no gano </h3>
-        </li>
+        <h2>
+            <p><i class="fa fa-spinner fa-spin"></i>Esperando a que te animes...</p>
+        </h2>
+
+        <!-- <h3 [hidden]="!nuevoJuego.gano">usted adivino el número</h3>
+      <h3 [hidden]="nuevoJuego.gano">usted aún no gano </h3> -->
+
+
     </ul>
 
-</form>
+</div>
