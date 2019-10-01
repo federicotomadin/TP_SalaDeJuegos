@@ -1,0 +1,47 @@
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+<link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400" />
+
+
+<div id="id04" class="modal">
+    <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">×</span>
+    <form class="modal-content animate">
+        <div class="container">
+            <h3 id="mensajeModal">{{mensajeResultado}}</h3>
+
+            <div class="clearfix">
+                <a type="button" class="btn" onclick="document.getElementById('id04').style.display='none'">Buscar más palabras</a>
+                <a type="button" class="btn" routerLink="/Principal">Ir a menu de inicio</a>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+<!-- matriz sopa -->
+
+
+<div class="container">
+
+    <div id="matriz">
+        <h1>{{Titulo}}</h1>
+        <h3>{{Subtitulo}}</h3>
+
+        <div id="sopa">
+            <div><br></div>
+            <ul *ngFor="let linea of matrizPrincipal">
+                <ul>
+                    <button (click)="verificar($event)" class="btnNormal" *ngFor="let obj of linea" [id]="obj.id">
+                    {{ obj.contenido }}
+                </button>
+                </ul>
+            </ul>
+            <div class="separador"></div>
+
+            <div id="wrapper">
+                <button type="button" (click)="evaluar($event)" id="btnverificar" class="btn btn-success">Son todas!!</button>
+            </div>
+        </div>
+    </div>
+</div>
