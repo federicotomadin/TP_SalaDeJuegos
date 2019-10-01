@@ -37,6 +37,15 @@ export class AgilidadAritmeticaComponent implements OnInit {
     console.info('Inicio agilidad');
   }
 
+  LimpiarFormulario()
+  {
+    this.nuevoJuego = new JuegoAgilidad();
+    this.pNumero = this.nuevoJuego.primerNumero;
+    this.sNumero = this.nuevoJuego.segundoNumero;
+    this.sOperador = this.operadores[this.nuevoJuego.operador];
+
+  }
+
   NuevoJuego() {
 
     this.nuevoJuego = new JuegoAgilidad();
@@ -62,14 +71,13 @@ export class AgilidadAritmeticaComponent implements OnInit {
   verificar() {
     console.log('Tu respuesta: ' + this.respuesta);
 
-    if (this.nuevoJuego.verificar(this.nuevoJuego), this.respuesta) {
+    if (this.nuevoJuego.realizarCuenta() == this.respuesta) {
 
-      const idJugador = 5;
-      console.log('id' + idJugador);
       this.enviarJuego.emit(this.nuevoJuego);
       // const respuesta = this.MiServicioGame.httpGet_Game('ActualizarPuntaje', 'jugador=' + idJugador + '&juego=AgilidadaMasListado&puntaje=1');
 
       this.mensajeResultado = 'Ganaste';
+      // this.LimpiarFormulario();
 
     }
 
@@ -89,7 +97,7 @@ export class AgilidadAritmeticaComponent implements OnInit {
 
     document.getElementById('id02').style.display = 'block';
 
-    this.ocultarVerificar = false;
+    this.ocultarVerificar = true;
     clearInterval(this.repetidor);
     this.respuesta = null;
 
