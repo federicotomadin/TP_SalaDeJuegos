@@ -16,15 +16,15 @@ export class AgilidadAritmeticaComponent implements OnInit {
   ocultarVerificar: boolean;
   Tiempo: number;
   repetidor: any;
-  private nombreJuego = 'Agilidad Aritmética';
+  public nombreJuego = 'Agilidad Aritmética';
   private subscription: Subscription;
 
-  private pNumero: number;
-  private sNumero: number;
-  private sOperador: string;
-  private operadores: string[] = ['+', '-', '*', '/'];
-  private respuesta: number;
-  private mensajeResultado = '';
+  public pNumero: number;
+  public sNumero: number;
+  public sOperador: string;
+  public operadores: string[] = ['+', '-', '*', '/'];
+  public respuesta: number;
+  public mensajeResultado = '';
 
 
   ngOnInit() {

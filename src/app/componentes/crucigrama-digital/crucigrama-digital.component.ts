@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BG} from './../../clases/boton-grilla';
 import {ProcesaGrilla} from './../../clases/procesa-grilla';
-import { BootstrapModalModule } from './../../../../node_modules/ngx-bootstrap-modal/index';
 
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
@@ -75,8 +74,7 @@ export class CrucigramaDigitalComponent implements OnInit {
 
   }
 
-  evaluar()
-  {
+  evaluar() {
       const esGanador = false;
       this.procesa = new ProcesaGrilla();
       const palabrasEncontradas = this.procesa.evaluaRespuesta(this.matrizPrincipal, this.matrizRespuestas);
