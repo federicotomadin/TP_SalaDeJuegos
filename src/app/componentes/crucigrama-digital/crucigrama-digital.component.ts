@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {BG} from './../../clases/boton-grilla';
 import {ProcesaGrilla} from './../../clases/procesa-grilla';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
@@ -17,6 +19,7 @@ export class CrucigramaDigitalComponent implements OnInit {
 
   Titulo = 'Sopa de letras';
   Subtitulo = 'Encontrá 5 capitales del mundo';
+  ganaste = false;
   procesa: ProcesaGrilla;
   mensajeResultado = '';
 
@@ -59,14 +62,14 @@ export class CrucigramaDigitalComponent implements OnInit {
   crearDetalleModal: boolean;
 
 
-  constructor() {
+  constructor(private modalService: NgbModal) {
    }
 
   clasesBotones = {'btnPresionado': false, 'btnNormal': true};
 
   ngOnInit() {
 
-    console.info('Inico Palabras Rápidas');
+    console.log('ngOnInit');
 
     // $('#myModal').on('shown.bs.modal', function () {
     //   $('#myInput').trigger('focus')
@@ -84,8 +87,14 @@ export class CrucigramaDigitalComponent implements OnInit {
       document.getElementById('id04').style.display = 'block';
       console.log('En verificar palabra');
 
+        if (palabrasEncontradas == 5)
+        {
+          // this.palabrasEncontradas = 0;
+          this.ganaste = true;
+        }
 
   }
+
 
   verificar(boton)
   {
