@@ -71,10 +71,6 @@ export class CrucigramaDigitalComponent implements OnInit {
 
     console.log('ngOnInit');
 
-    // $('#myModal').on('shown.bs.modal', function () {
-    //   $('#myInput').trigger('focus')
-    // })
-
   }
 
   evaluar() {
@@ -84,25 +80,22 @@ export class CrucigramaDigitalComponent implements OnInit {
       console.log('Palabras encontradas: ' + palabrasEncontradas);
 
       this.mensajeResultado = 'Palabras encontradas: ' + palabrasEncontradas;
+      if (palabrasEncontradas === 1) {
+        // this.palabrasEncontradas = 0;
+        this.ganaste = true;
+        console.log('algo');
+        document.getElementById('id05').style.display = 'block';
+      } else {
       document.getElementById('id04').style.display = 'block';
-      console.log('En verificar palabra');
-
-        if (palabrasEncontradas == 5)
-        {
-          // this.palabrasEncontradas = 0;
-          this.ganaste = true;
-        }
-
+      }
   }
 
 
-  verificar(boton)
-  {
+  verificar(boton) {
 
       this.cambiarEstado(boton.toElement.id);
 
-        if (boton.toElement.className == 'btnPresionado')
-        {
+        if (boton.toElement.className === 'btnPresionado') {
             boton.toElement.className = 'btnNormal';
         } else {
             boton.toElement.className = 'btnPresionado';
@@ -110,14 +103,12 @@ export class CrucigramaDigitalComponent implements OnInit {
 
     }
 
-    cambiarEstado(pId)
-    {
+    cambiarEstado(pId) {
 
       this.matrizPrincipal.forEach(linea => {
         linea.forEach(element => {
 
-          if (pId == element.id)
-          {
+          if (pId === element.id) {
             element.seleccionado = true;
           }
 

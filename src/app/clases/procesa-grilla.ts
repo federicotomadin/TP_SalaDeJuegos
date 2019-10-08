@@ -31,7 +31,6 @@ export class ProcesaGrilla {
         });
 
         return contador;
-
     }
 
     esRespuesta(casilla: BG, palabraBuscada: BG[]): boolean
@@ -47,7 +46,6 @@ export class ProcesaGrilla {
 
          });
          return estaMarcada;
-
     }
 
 }
