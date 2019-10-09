@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BG} from './../../clases/boton-grilla';
 import {ProcesaGrilla} from './../../clases/procesa-grilla';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 
 import { ModalDirective } from 'ngx-bootstrap/modal';
@@ -19,7 +20,7 @@ export class CrucigramaDigitalComponent implements OnInit {
 
   Titulo = 'Sopa de letras';
   Subtitulo = 'Encontrá 5 capitales del mundo';
-  ganaste = false;
+  ganaste: boolean;
   procesa: ProcesaGrilla;
   mensajeResultado = '';
 
@@ -62,7 +63,9 @@ export class CrucigramaDigitalComponent implements OnInit {
   crearDetalleModal: boolean;
 
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private router: Router) {
+
+
    }
 
   clasesBotones = {'btnPresionado': false, 'btnNormal': true};
@@ -80,7 +83,8 @@ export class CrucigramaDigitalComponent implements OnInit {
       console.log('Palabras encontradas: ' + palabrasEncontradas);
 
       this.mensajeResultado = 'Palabras encontradas: ' + palabrasEncontradas;
-      if (palabrasEncontradas === 1) {
+
+      if (palabrasEncontradas === 5) {
         // this.palabrasEncontradas = 0;
         this.ganaste = true;
         console.log('algo');
@@ -100,7 +104,6 @@ export class CrucigramaDigitalComponent implements OnInit {
         } else {
             boton.toElement.className = 'btnPresionado';
         }
-
     }
 
     cambiarEstado(pId) {
@@ -115,7 +118,6 @@ export class CrucigramaDigitalComponent implements OnInit {
         });
 
       });
-
     }
 
 
@@ -125,6 +127,14 @@ abrirDetalleModal() {
 
 cerrarDetalleModal() {
   this.crearDetalleModal = false;
+}
+
+juegoDeCero() {
+
+  document.getElementById('id05').style.display = 'none';
+  this.ganaste = true;
+  this.router.navigate(['/Principal']);
+
 }
 
 }

@@ -2,8 +2,20 @@
 <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400" />
 
-<div *ngIf="ganaste" id="id05" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('id05');
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+<div id="id05" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">ADIVINASTE 5 PALABRAS</h5>
@@ -16,7 +28,7 @@
             </div>
             <div class="clearfix">
                 <div class="modal-footer">
-                    <button type="button" onclick="document.getElementById('id05').style.display='none'" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" (click)="juegoDeCero()" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>
@@ -25,24 +37,26 @@
 </div>
 
 
-<div id="id04" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">X</span>
-            <form class="modal-content animate">
-                <div class="container">
-                    <h3 id="mensajeModal">{{mensajeResultado}}</h3>
+<ng-template #seguirJugando>
+    <div id="id04" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">X</span>
+                <form class="modal-content animate">
+                    <div class="container">
+                        <h3 id="mensajeModal">{{mensajeResultado}}</h3>
 
-                    <div class="clearfix">
-                        <a type="button" class="btn" onclick="document.getElementById('id04').style.display='none'">Buscar más palabras</a>
-                        <a type="button" class="btn" routerLink="/Principal">Ir a menu de inicio</a>
+                        <div class="clearfix">
+                            <a type="button" class="btn" onclick="document.getElementById('id04').style.display='none'">Buscar más palabras</a>
+                            <a type="button" class="btn" routerLink="/Principal">Ir a menu de inicio</a>
+                        </div>
+
                     </div>
-
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+</ng-template>
 
 
 <!-- matriz sopa -->
@@ -66,6 +80,7 @@
             <div class="separador"></div>
 
             <div id="wrapper">
+
                 <button type="button" (click)="evaluar()" id="btnverificar" class="btn btn-success">Son todas!!</button>
             </div>
         </div>
