@@ -23,7 +23,36 @@ export class CrucigramaDigitalComponent implements OnInit {
   ganaste: boolean;
   procesa: ProcesaGrilla;
   mensajeResultado = '';
-  crucigrama = 2;
+  crucigrama = 1;
+  palabrasEncontradas: number;
+
+  J10= new BG('J10', 'K'); J11= new BG('J11', 'M'); J12= new BG('J12', 'M'); J13= new BG('J13', 'N'); J14= new BG('J14', 'D'); J15= new BG('J15', 'A'); J16= new BG('J16', 'X'); J17= new BG('J17', 'X'); J18= new BG('J18', 'X'); J19= new BG('J19', 'X');
+  K10= new BG('K10', 'B'); K11= new BG('K11', 'C'); K12= new BG('K12', 'A'); K13= new BG('K13', 'S'); K14= new BG('K14', 'A'); K15= new BG('K15', 'N'); K16= new BG('K16', 'X'); K17= new BG('K17', 'X'); K18= new BG('K18', 'X'); K19= new BG('K19', 'N');
+  L10= new BG('L10', 'X'); L11= new BG('L11', 'O'); L12= new BG('L12', 'D'); L13= new BG('L13', 'S'); L14= new BG('L14', 'A'); L15= new BG('L15', 'I'); L16= new BG('L16', 'X'); L17= new BG('L17', 'X'); L18= new BG('L18', 'X'); L19= new BG('L19', 'A');
+  M10= new BG('M10', 'X'); M11= new BG('M11', 'R'); M12= new BG('M12', 'R'); M13= new BG('M13', 'S'); M14= new BG('M14', 'A'); M15= new BG('M15', 'L'); M16= new BG('M16', 'X'); M17= new BG('M17', 'X'); M18= new BG('M18', 'X'); M19= new BG('M19', 'P');
+  N10= new BG('N10', 'R'); N11= new BG('N11', 'C'); N12= new BG('N12', 'I'); N13= new BG('N13', 'O'); N14= new BG('N14', 'U'); N15= new BG('N15', 'R'); N16= new BG('N16', 'X'); N17= new BG('N17', 'X'); N18= new BG('N18', 'X'); N19= new BG('N19', 'O');
+  P10= new BG('P10', 'X'); P11= new BG('P11', 'O'); P12= new BG('P12', 'D'); P13= new BG('P13', 'M'); P14= new BG('P14', 'L'); P15= new BG('P15', 'E'); P16= new BG('P16', 'X'); P17= new BG('P17', 'X'); P18= new BG('P18', 'X'); P19= new BG('P19', 'M');
+  Q10= new BG('Q10', 'X'); Q11= new BG('Q11', 'C'); Q12= new BG('Q12', 'M'); Q13= new BG('Q13', 'S'); Q14= new BG('Q14', 'A'); Q15= new BG('Q15', 'A'); Q16= new BG('Q16', 'X'); Q17= new BG('Q17', 'X'); Q18= new BG('Q18', 'X'); Q19= new BG('Q19', 'L');
+  R10= new BG('R10', 'R'); R11= new BG('R11', 'K'); R12= new BG('R12', 'L'); R13= new BG('R13', 'A'); R14= new BG('R14', 'X'); R15= new BG('R15', 'R'); R16= new BG('R16', 'X'); R17= new BG('R17', 'X'); R18= new BG('R18', 'X'); R19= new BG('R19', 'E');
+  S10= new BG('S10', 'P'); S11= new BG('S11', 'Q'); S12= new BG('S12', 'U'); S13= new BG('S13', 'I'); S14= new BG('S14', 'T'); S15= new BG('S15', 'O'); S16= new BG('S16', 'X'); S17= new BG('S17', 'X'); S18= new BG('S18', 'X'); S19= new BG('S19', 'B');
+
+  linea18 = [this.J10, this.J11, this.J12, this.J13, this.J14, this.J15, this.J16, this.J17, this.J18, this.J19];
+  linea19 = [this.K10, this.K11, this.K12, this.K13, this.K14, this.K15, this.K16, this.K17, this.K18, this.K19];
+  linea20 = [this.L10, this.L11, this.L12, this.L13, this.L14, this.L15, this.L16, this.L17, this.L18, this.L19];
+  linea21 = [this.M10, this.M11, this.M12, this.M13, this.M14, this.M15, this.M16, this.M17, this.M18, this.M19];
+  linea22 = [this.N10, this.N11, this.N12, this.N13, this.N14, this.N15, this.N16, this.N17, this.N18, this.N19];
+  linea23 = [this.P10, this.P11, this.P12, this.P13, this.P14, this.P15, this.P16, this.P17, this.P18, this.P19];
+  linea24 = [this.Q10, this.Q11, this.Q12, this.Q13, this.Q14, this.Q15, this.Q16, this.Q17, this.Q18, this.Q19];
+  linea25 = [this.R10, this.R11, this.R12, this.R13, this.R14, this.R15, this.R16, this.R17, this.R18, this.R19];
+  linea26 = [this.S10, this.S11, this.S12, this.S13, this.S14, this.S15, this.S16, this.S17, this.S18, this.S19];
+
+  matrizPrincipal3 = [this.linea18, this.linea19, this.linea20, this.linea21, this.linea22, this.linea23, this.linea24, this.linea25, this.linea26];
+
+  respuesta11A = [this.N10, this.P11, this.Q12, this.R13];
+  respuesta21B = [this.S11, this.S12, this.S13, this.S14, this.S15];
+  respuesta31C = [this.J12, this.K12, this.L12, this.M12, this.N12, this.P12];
+
+  matrizRespuestas3 = [this.respuesta11A, this.respuesta21B, this.respuesta31C];
 
   J0= new BG('J0', 'L'); J1= new BG('J1', 'U'); J2= new BG('J2', 'A'); J3= new BG('J3', 'N'); J4= new BG('J4', 'D'); J5= new BG('J5', 'A'); J6= new BG('J6', 'X'); J7= new BG('J7', 'X'); J8= new BG('J8', 'X'); J9= new BG('J9', 'X');
   K0= new BG('K0', 'B'); K1= new BG('K1', 'C'); K2= new BG('K2', 'A'); K3= new BG('K3', 'S'); K4= new BG('K4', 'A'); K5= new BG('K5', 'N'); K6= new BG('K6', 'X'); K7= new BG('K7', 'X'); K8= new BG('K8', 'X'); K9= new BG('K9', 'N');
@@ -51,7 +80,7 @@ export class CrucigramaDigitalComponent implements OnInit {
   respuesta2B = [this.P1, this.P2, this.P3, this.P4];
   respuesta3C = [this.J0, this.J1, this.J2, this.J3, this.J4, this.J5];
 
-  matrizRespuestas3 = [this.respuesta1A, this.respuesta2B, this.respuesta3C];
+  matrizRespuestas2 = [this.respuesta1A, this.respuesta2B, this.respuesta3C];
 
 
   A0= new BG('A0', 'A'); A1= new BG('A1', 'N'); A2= new BG('A2', 'A'); A3= new BG('A3', 'R'); A4= new BG('A4', 'I'); A5= new BG('A5', 'T'); A6= new BG('A6', 'X'); A7= new BG('A7', 'X'); A8= new BG('A8', 'X'); A9= new BG('A9', 'X');
@@ -97,20 +126,46 @@ export class CrucigramaDigitalComponent implements OnInit {
 
   ngOnInit() {
 
+    const cruci = localStorage.getItem('crucigrama')
+
+    if (cruci == undefined) {
+      localStorage.setItem('crucigrama', '1');
+    }
+    if (cruci == '1') {
+      localStorage.setItem('crucigrama', '1');
+    }
+    if (cruci == '2') {
+      localStorage.setItem('crucigrama', '2');
+    }
+    if (cruci == '3') {
+      localStorage.setItem('crucigrama', '3');
+    }
+
+
     this.crucigrama = parseInt(localStorage.getItem('crucigrama'), 10);
-    console.log('ngOnInit');
 
   }
 
   evaluar() {
       const esGanador = false;
       this.procesa = new ProcesaGrilla();
-      const palabrasEncontradas = this.procesa.evaluaRespuesta(this.matrizPrincipal, this.matrizRespuestas);
-      console.log('Palabras encontradas: ' + palabrasEncontradas);
 
-      this.mensajeResultado = 'Palabras encontradas: ' + palabrasEncontradas;
+       // chequeo que juego cargar
+      if (this.crucigrama == 1) {
+        this.palabrasEncontradas = this.procesa.evaluaRespuesta(this.matrizPrincipal, this.matrizRespuestas);
+      }
+      if (this.crucigrama == 2) {
+        this.palabrasEncontradas = this.procesa.evaluaRespuesta(this.matrizPrincipal2, this.matrizRespuestas2);
+      }
+      if (this.crucigrama == 3) {
+        this.palabrasEncontradas = this.procesa.evaluaRespuesta(this.matrizPrincipal3, this.matrizRespuestas3);
+      }
+      console.log('Palabras encontradas: ' + this.palabrasEncontradas);
 
-      if (palabrasEncontradas === 3) {
+      this.mensajeResultado = 'Palabras encontradas: ' + this.palabrasEncontradas;
+
+      // verifico si ganó
+      if (this.palabrasEncontradas === 3) {
         this.ganaste = true;
         document.getElementById('id05').style.display = 'block';
       } else {
@@ -132,17 +187,36 @@ export class CrucigramaDigitalComponent implements OnInit {
 
     cambiarEstado(pId) {
 
-      this.matrizPrincipal.forEach(linea => {
-        linea.forEach(element => {
+      if (this.crucigrama == 1) {
+        this.matrizPrincipal.forEach(linea => {
+          linea.forEach(element => {
+            if (pId === element.id) {
+              element.seleccionado = true;
+            }
+          });
+        });
+      }
 
+      if (this.crucigrama == 2) {
+        this.matrizPrincipal2.forEach(linea => {
+          linea.forEach(element => {
+            if (pId === element.id) {
+              element.seleccionado = true;
+            }
+          });
+        });
+      }
+
+    if (this.crucigrama == 3) {
+      this.matrizPrincipal3.forEach(linea => {
+        linea.forEach(element => {
           if (pId === element.id) {
             element.seleccionado = true;
           }
-
         });
-
       });
     }
+  }
 
 
 abrirDetalleModal() {
@@ -159,6 +233,9 @@ juegoDeCero() {
     localStorage.setItem('crucigrama', '2');
   }
   if (this.crucigrama == 2) {
+    localStorage.setItem('crucigrama', '3');
+  }
+  if (this.crucigrama == 3) {
     localStorage.setItem('crucigrama', '1');
   }
 

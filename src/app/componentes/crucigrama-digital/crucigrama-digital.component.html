@@ -100,5 +100,23 @@
             </div>
         </div>
 
+        <div *ngIf="crucigrama==3" id="sopa">
+            <div><br></div>
+            <ul *ngFor="let linea of matrizPrincipal3">
+                <ul>
+                    <button (click)="verificar($event)" class="btnNormal" *ngFor="let obj of linea" [id]="obj.id">
+                    {{ obj.contenido }}
+                </button>
+                </ul>
+            </ul>
+            <div class="separador"></div>
+
+            <div id="wrapper">
+
+                <button type="button" (click)="evaluar()" id="btnverificar" class="btn btn-success">Son todas!!</button>
+            </div>
+        </div>
+
+
     </div>
 </div>
