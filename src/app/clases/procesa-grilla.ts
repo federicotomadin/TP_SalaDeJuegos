@@ -4,8 +4,10 @@ import { BG } from './boton-grilla';
 
 export class ProcesaGrilla {
 
-    evaluaRespuesta(pMatriz, pMatrizRespuestas): number
-    {
+    constructor() {
+    }
+
+    evaluaRespuesta(pMatriz, pMatrizRespuestas): number {
         let contador = 0;
         let encontroPalabra = true;
 
@@ -17,8 +19,7 @@ export class ProcesaGrilla {
 
                 for (let index = 0; index < element.length; index++) {
 
-                    if (this.esRespuesta(element[index], palabraBuscada) === false)
-                    {
+                    if (this.esRespuesta(element[index], palabraBuscada) === false) {
                         encontroPalabra = false;
                     }
                 }
@@ -33,8 +34,7 @@ export class ProcesaGrilla {
         return contador;
     }
 
-    esRespuesta(casilla: BG, palabraBuscada: BG[]): boolean
-    {
+    esRespuesta(casilla: BG, palabraBuscada: BG[]): boolean {
         let estaMarcada = true;
 
         palabraBuscada.forEach(element => {
@@ -47,5 +47,4 @@ export class ProcesaGrilla {
          });
          return estaMarcada;
     }
-
 }

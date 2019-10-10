@@ -18,7 +18,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">ADIVINASTE 5 PALABRAS</h5>
+                <h5 class="modal-title">ADIVINASTE 3 PALABRAS</h5>
                 <button type="button" onclick="document.getElementById('id05').style.display='none'" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -36,27 +36,25 @@
     </div>
 </div>
 
+<div id="id04" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">X</span>
+            <form class="modal-content animate">
+                <div class="container">
+                    <h3 id="mensajeModal">{{mensajeResultado}}</h3>
 
-<ng-template #seguirJugando>
-    <div id="id04" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">X</span>
-                <form class="modal-content animate">
-                    <div class="container">
-                        <h3 id="mensajeModal">{{mensajeResultado}}</h3>
-
-                        <div class="clearfix">
-                            <a type="button" class="btn" onclick="document.getElementById('id04').style.display='none'">Buscar más palabras</a>
-                            <a type="button" class="btn" routerLink="/Principal">Ir a menu de inicio</a>
-                        </div>
-
+                    <div class="clearfix">
+                        <a type="button" class="btn" onclick="document.getElementById('id04').style.display='none'">Buscar más palabras</a>
+                        <a type="button" class="btn" (click)="juegoDeCero()" routerLink="/Principal">Ir a menu de inicio</a>
                     </div>
-                </form>
-            </div>
+
+                </div>
+            </form>
         </div>
     </div>
-</ng-template>
+</div>
+
 
 
 <!-- matriz sopa -->
@@ -68,7 +66,7 @@
         <h1>{{Titulo}}</h1>
         <h3>{{Subtitulo}}</h3>
 
-        <div id="sopa">
+        <div *ngIf="crucigrama==1" id="sopa">
             <div><br></div>
             <ul *ngFor="let linea of matrizPrincipal">
                 <ul>
@@ -84,5 +82,23 @@
                 <button type="button" (click)="evaluar()" id="btnverificar" class="btn btn-success">Son todas!!</button>
             </div>
         </div>
+
+        <div *ngIf="crucigrama==2" id="sopa">
+            <div><br></div>
+            <ul *ngFor="let linea of matrizPrincipal2">
+                <ul>
+                    <button (click)="verificar($event)" class="btnNormal" *ngFor="let obj of linea" [id]="obj.id">
+                    {{ obj.contenido }}
+                </button>
+                </ul>
+            </ul>
+            <div class="separador"></div>
+
+            <div id="wrapper">
+
+                <button type="button" (click)="evaluar()" id="btnverificar" class="btn btn-success">Son todas!!</button>
+            </div>
+        </div>
+
     </div>
 </div>
