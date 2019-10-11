@@ -26,6 +26,7 @@ import { AdivinaMasListadoComponent } from './componentes/adivina-mas-listado/ad
 import { AgilidadMasListadoComponent } from './componentes/agilidad-mas-listado/agilidad-mas-listado.component';
 import { RuteandoModule } from './ruteando/ruteando.module';
 import { ListadoComponent } from './componentes/listado/listado.component';
+import { HttpClientModule } from '@angular/common/http'; 
 
 // declaro donde quiero que se dirija
 /*101
@@ -55,6 +56,7 @@ import { AgmCoreModule } from '@agm/core';
 import { InputJugadoresComponent } from './componentes/input-jugadores/input-jugadores.component';
 import { SexoPipe } from './pipes/sexo.pipe';
 import { CrucigramaDigitalComponent } from './componentes/crucigrama-digital/crucigrama-digital.component';
+
 
 @NgModule({
   declarations: [
@@ -87,6 +89,7 @@ import { CrucigramaDigitalComponent } from './componentes/crucigrama-digital/cru
     FormsModule,
     RuteandoModule,
     HttpModule,
+    HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB6f8x4IjRlesQ3oETc6BXYQHVRTOlY3Ys'
     })
