@@ -33,8 +33,8 @@
                 <input type="text" placeholder="Email" [(ngModel)]="unJugador.email" name="email" required>
 
                 <label><b>Clave</b></label><br>
-                <span *ngIf="f.submitted && f.controls['psw'].errors" class="text-danger animated fadeIn">La contraseña es obligatoria</span>
-                <input type="password" placeholder="Clave" [(ngModel)]="unJugador.pass" name="psw" minlength="6" required>
+                <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger animated fadeIn">La contraseña es obligatoria</span>
+                <input type="password" placeholder="Clave" [(ngModel)]="unJugador.password" name="password" minlength="6" required>
 
                 <button *ngIf="logeando" type="submit" (click)="MoverBarraDeProgreso( f )">Ingresar</button><br>
 
@@ -50,7 +50,7 @@
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
-                <button type="button" class="cancelbtn">Cancelar</button>
+                <button type="button" routerLink="/Principal" class="cancelbtn">Cancelar</button>
                 <button type="button" class="aceptbtn" routerLink="/Registro">Registrarse</button>
                 <span class="psw">Te olvidaste <a href="#">la clave?</a></span>
             </div>

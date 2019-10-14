@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Jugador } from '../../clases/jugador';
-import { ServicioGamesService } from '../../servicios/servicio-games.service';
-import { MiHttpService } from '../../servicios/mi-http/mi-http.service';
 import { FormBuilder, FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'; 
-import { HttpModule } from '@angular/http';
-import { NgForOf } from '@angular/common';
+import { AuthService } from '../../servicios/auth.service';
 
 
 
@@ -35,19 +30,19 @@ export class RegistroComponent implements OnInit {
   name = '';
   psw = '';
   // private MiHttpService: MiHttpService
-  constructor(private MiServicioGame: ServicioGamesService, private MiHttpService: MiHttpService) { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
     this.unJugador = new Jugador();
-    this.unJugador.email = 'federicotomadin@gmail.com';
+
   }
   RegistrarUsuario() {
   this.unJugador = new Jugador();
 
 
-  const parametrosRegistro = '?email=' + this.name + '&pass=' + this.psw + '&usuario=' + this.usuario;
-  const respuesta =   this.MiServicioGame.httpGet_Game('Registro', parametrosRegistro);
-   console.log(respuesta);
+  // const parametrosRegistro = '?email=' + this.name + '&pass=' + this.psw + '&usuario=' + this.usuario;
+  // const respuesta =   this.MiServicioGame.httpGet_Game('Registro', parametrosRegistro);
+  //  console.log(respuesta);
   }
 
   ngSubmit(form: NgForm) {
@@ -55,7 +50,15 @@ export class RegistroComponent implements OnInit {
 
   if (form.invalid) { return; }
 
-    console.log(this.unJugador);
-    console.log(form);
+  this.auth.NuevoUsuario(this.unJugador)
+  .subscribe( resp => {
+
+    console.log(resp);
+
+  }, (err) => {
+      console.log(err.error.error.message);
+
+  })
+
   }
 }

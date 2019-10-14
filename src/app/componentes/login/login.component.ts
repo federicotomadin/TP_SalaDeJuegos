@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Jugador } from '../../clases/jugador';
 import { FormBuilder, FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
+import { AuthService } from '../../servicios/auth.service';
+
 
 
 
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   clase= 'progress-bar progress-bar-info progress-bar-striped ';
 
-  constructor(
+  constructor(private auth: AuthService, 
     private route: ActivatedRoute,
     private router: Router) {
       this.progreso = 0;
@@ -42,7 +44,19 @@ export class LoginComponent implements OnInit {
 
     if (form.invalid) { return; }
 
-  }
+    this.auth.Login(this.unJugador) 
+     .subscribe( resp => {
+
+      console.log(resp);
+
+     }, (err) => {
+
+      console.log(err.error.error.message);
+
+     })
+    }
+
+  
 
   ngSubmit(form: NgForm) {
     if (form.invalid) {
@@ -89,7 +103,9 @@ export class LoginComponent implements OnInit {
 
         case 100:
           console.log('final');
+          this.Login(form);
           this.subscription.unsubscribe();
+          this.progreso = 0
           break;
       }
     });

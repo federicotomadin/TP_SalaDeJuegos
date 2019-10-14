@@ -23,12 +23,12 @@
                 <input type="text" placeholder="Ingresá tu correo" [(ngModel)]="unJugador.email" name="email" required>
 
                 <label><b>Clave</b></label><br>
-                <span *ngIf="f.submitted && f.controls['psw'].errors" class="text-danger animated fadeIn">La contraseña es obligatoria</span>
-                <input type="password" placeholder="Acá la clave" [(ngModel)]="unJugador.pass" name="psw" minlength="6" required>
+                <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger animated fadeIn">La contraseña es obligatoria, minimo 6 caracteres</span>
+                <input type="password" placeholder="Acá la clave" [(ngModel)]="unJugador.password" name="password" minlength="6" required>
 
-                <label><b>Repita la clave</b></label><br>
+                <!-- <label><b>Repita la clave</b></label><br>
                 <span *ngIf="f.submitted && f.controls['psw-repeat'].errors" class="text-danger animated fadeIn">La contraseña tiene que repetirse</span>
-                <input type="password" placeholder="Acá repetí la misma clave  de arriba" [(ngModel)]="unJugador.pass" name="psw-repeat" required>
+                <input type="password" placeholder="Acá repetí la misma clave  de arriba" [(ngModel)]="unJugador.pass" name="psw-repeat" required> -->
 
                 <input type="checkbox" checked="checked">Recordar mis datos
                 <p>creando la cuenta aceptando los <a style="color: blue" onclick="document.getElementById('id01').style.display='none'">Terminos y condiciones</a>.</p>

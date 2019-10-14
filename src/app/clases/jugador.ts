@@ -10,7 +10,7 @@ export class Jugador {
 
     'apellido': string;
 
-    'pass': string;
+    'password': string;
 
     'puntaje': string;
 }

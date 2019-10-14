@@ -56,6 +56,7 @@ import { AgmCoreModule } from '@agm/core';
 import { InputJugadoresComponent } from './componentes/input-jugadores/input-jugadores.component';
 import { SexoPipe } from './pipes/sexo.pipe';
 import { CrucigramaDigitalComponent } from './componentes/crucigrama-digital/crucigrama-digital.component';
+import { AuthService } from './servicios/auth.service';
 
 
 @NgModule({
@@ -97,7 +98,7 @@ import { CrucigramaDigitalComponent } from './componentes/crucigrama-digital/cru
     // importo el ruteo
     // RouterModule.forRoot(MiRuteo)
   ],
-  providers: [ JuegoServiceService, MiHttpService,PaisesService,ArchivosJugadoresService,JugadoresService],
+  providers: [ JuegoServiceService, MiHttpService,PaisesService,ArchivosJugadoresService,JugadoresService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
