@@ -21,37 +21,39 @@
     </div>
   </div>
 </div-->
- <div class="container" >
-  <div class="jumbotron" style="padding:50px;">
-    <form action="return true;">
-      <div class="imgcontainer">
-        <img src="./assets/imagenes/login.png" alt="Avatar" class="avatar" max-width="104" >
-      </div>
-
-      <div class="container">
-        <label><b>Usuario</b></label>
-        <input type="text" placeholder="Usuario"  [(ngModel)]="usuario"  name="uname" required>
-
-        <label><b>Clave</b></label>
-        <input type="password" placeholder="Clave"  [(ngModel)]="clave" name="psw" required>
-            
-        <button *ngIf="logeando"  (click)="MoverBarraDeProgreso()" >Ingresar</button>
-       
-        <div *ngIf="!logeando" class="progress">
-            <div class="progress-bar progress-bar-info progress-bar-striped active" [class]="clase" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" [style.width]="ProgresoDeAncho" >
-              {{progresoMensaje}} - {{progreso}}%
+<div class="container animated fadeInLeft faster">
+    <div class="jumbotron" style="padding:50px;">
+        <form (ngSubmit)="ngSubmit( f )" #f="ngForm" class="modal-content animate">
+            <div class="imgcontainer">
+                <img src="./assets/imagenes/login.png" alt="Smiley face">
             </div>
-        </div>
-       
-        <input type="checkbox" checked="checked"> Recordar mis datos
-      </div>
+            <div class="container">
+                <label><b>Usuario</b></label><br>
+                <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">El email es obligatorio</span>
+                <input type="text" placeholder="Email" [(ngModel)]="unJugador.email" name="email" required>
 
-      <div class="container" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Cancelar</button>
-        <button type="button" class="aceptbtn" routerLink="/Registro" >Registrarse</button>
-        <span class="psw">Te olvidaste <a href="#">la clave?</a></span>
-      </div>
-     
-    </form>
-  </div>
+                <label><b>Clave</b></label><br>
+                <span *ngIf="f.submitted && f.controls['psw'].errors" class="text-danger animated fadeIn">La contraseña es obligatoria</span>
+                <input type="password" placeholder="Clave" [(ngModel)]="unJugador.pass" name="psw" minlength="6" required>
+
+                <button *ngIf="logeando" type="submit" (click)="MoverBarraDeProgreso( f )">Ingresar</button><br>
+
+                <div class="progress">
+                    <!-- *ngIf="!logeando" -->
+                    <div class="progress-bar progress-bar-info progress-bar-striped active" [class]="clase" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" [style.width]="ProgresoDeAncho">
+                        {{progresoMensaje}} - {{progreso}}%
+                    </div>
+                </div>
+
+                <input type="checkbox" checked="checked"> Recordar mis datos <br>
+                <!-- <button type="button" (click)="Login()" class="btn btn-primary btn-lg btn-block">Ingresar</button> -->
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" class="cancelbtn">Cancelar</button>
+                <button type="button" class="aceptbtn" routerLink="/Registro">Registrarse</button>
+                <span class="psw">Te olvidaste <a href="#">la clave?</a></span>
+            </div>
+        </form>
+    </div>
 </div>

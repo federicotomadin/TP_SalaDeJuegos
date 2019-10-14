@@ -10,6 +10,7 @@ import { NgForOf } from '@angular/common';
 
 
 
+
 // para poder hacer las validaciones
 // import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 @Component({
@@ -38,7 +39,7 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit() {
     this.unJugador = new Jugador();
-    this.unJugador.email = "federicotomadin@gmail.com";
+    this.unJugador.email = 'federicotomadin@gmail.com';
   }
   RegistrarUsuario() {
   this.unJugador = new Jugador();
@@ -49,10 +50,10 @@ export class RegistroComponent implements OnInit {
    console.log(respuesta);
   }
 
-  ngSubmit(form:NgForm) {
+  ngSubmit(form: NgForm) {
 
 
-  if (form.invalid) { return;}
+  if (form.invalid) { return; }
 
     console.log(this.unJugador);
     console.log(form);
