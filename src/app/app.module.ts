@@ -11,10 +11,10 @@ import { HttpModule } from '@angular/http';
 // agrego las clases para utilizar ruteo
 import { RouterModule, Routes } from '@angular/router';
 
-import { MiHttpService } from './servicios/mi-http/mi-http.service'; 
-import { PaisesService } from './servicios/paises.service'; 
+import { MiHttpService } from './servicios/mi-http/mi-http.service';
+import { PaisesService } from './servicios/paises.service';
 
-import { JugadoresService } from './servicios/jugadores.service'; 
+import { JugadoresService } from './servicios/jugadores.service';
 import { NgModule } from '@angular/core';
 
 import { ArchivosJugadoresService} from './servicios/archivos-jugadores.service'; 
@@ -28,19 +28,6 @@ import { RuteandoModule } from './ruteando/ruteando.module';
 import { ListadoComponent } from './componentes/listado/listado.component';
 import { HttpClientModule } from '@angular/common/http'; 
 
-// declaro donde quiero que se dirija
-/*101
-const MiRuteo = [{path: 'error' , component: ErrorComponent},
-{path: 'Login' , component: LoginComponent},
-{path: 'Principal' , component: PrincipalComponent , pathMatch: 'full'},
-{path: 'Adivina' , component: AdivinaElNumeroComponent},
-{path: 'AdivinaMasListado' , component: AdivinaMasListadoComponent},
-{path: 'AgilidadaMasListado' , component: AgilidadMasListadoComponent},
-{path: 'Agilidad' , component: AgilidadAritmeticaComponent},
-{path: '' , component: LoginComponent , pathMatch: 'full'},
-
-{path: '**' , component: ErrorComponent} ];
-*/
 import { JugadoresListadoComponent } from './componentes/jugadores-listado/jugadores-listado.component';
 
 import { JuegoServiceService } from './servicios/juego-service.service';
@@ -57,6 +44,7 @@ import { InputJugadoresComponent } from './componentes/input-jugadores/input-jug
 import { SexoPipe } from './pipes/sexo.pipe';
 import { CrucigramaDigitalComponent } from './componentes/crucigrama-digital/crucigrama-digital.component';
 import { AuthService } from './servicios/auth.service';
+
 
 
 @NgModule({
@@ -91,14 +79,12 @@ import { AuthService } from './servicios/auth.service';
     RuteandoModule,
     HttpModule,
     HttpClientModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB6f8x4IjRlesQ3oETc6BXYQHVRTOlY3Ys'
-    })
+    // RouterModule.forRoot([])
     // NgbModule.forRoot(MiRuteo),
     // importo el ruteo
     // RouterModule.forRoot(MiRuteo)
   ],
-  providers: [ JuegoServiceService, MiHttpService,PaisesService,ArchivosJugadoresService,JugadoresService, AuthService],
+  providers: [ JuegoServiceService, MiHttpService, PaisesService, ArchivosJugadoresService, JugadoresService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

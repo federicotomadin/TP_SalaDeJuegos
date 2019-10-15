@@ -36,17 +36,16 @@
                 <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger animated fadeIn">La contraseña es obligatoria</span>
                 <input type="password" placeholder="Clave" [(ngModel)]="unJugador.password" name="password" minlength="6" required>
 
-                <button *ngIf="logeando" type="submit" (click)="MoverBarraDeProgreso( f )">Ingresar</button><br>
-
-                <div class="progress">
-                    <!-- *ngIf="!logeando" -->
-                    <div class="progress-bar progress-bar-info progress-bar-striped active" [class]="clase" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" [style.width]="ProgresoDeAncho">
+                <button type="submit">Ingresar</button><br>
+                <!-- (click)="MoverBarraDeProgreso( f ) -->
+                <!-- <div class="progress"> -->
+                <!-- *ngIf="!logeando" -->
+                <!-- <div class="progress-bar progress-bar-info progress-bar-striped active" [class]="clase" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" [style.width]="ProgresoDeAncho">
                         {{progresoMensaje}} - {{progreso}}%
                     </div>
-                </div>
+                </div> -->
 
-                <input type="checkbox" checked="checked"> Recordar mis datos <br>
-                <!-- <button type="button" (click)="Login()" class="btn btn-primary btn-lg btn-block">Ingresar</button> -->
+                <input type="checkbox" [(ngModel)]="recordarme" name="remember-me"> Recordar mis datos <br>
             </div>
 
             <div class="container" style="background-color:#f1f1f1">

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Jugador } from '../../clases/jugador';
-import { FormBuilder, FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
-import { AuthService } from '../../servicios/auth.service';
+import { NgForm } from '@angular/forms';
 
+import { Jugador } from '../../clases/jugador';
+import { AuthService } from '../../servicios/auth.service';
+import Swal from 'sweetalert2';
+import { Router} from '@angular/router';
 
 
 
@@ -14,23 +16,15 @@ import { AuthService } from '../../servicios/auth.service';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
-  // ngOnInit(): void {
-  //   throw new Error("Method not implemented.");
-  // }
 
-//  constructor( private miConstructor: FormBuilder) { }
-  // email=new FormControl ('',[Validators.email]);
-  // formRegistro:FormGroup=this.miConstructor.group({
-  //   usuario:this.email
-  // });
-
+  recordarme = false;
   unJugador: Jugador;
   res: boolean;
   usuario = '';
   name = '';
   psw = '';
   // private MiHttpService: MiHttpService
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.unJugador = new Jugador();
@@ -38,11 +32,6 @@ export class RegistroComponent implements OnInit {
   }
   RegistrarUsuario() {
   this.unJugador = new Jugador();
-
-
-  // const parametrosRegistro = '?email=' + this.name + '&pass=' + this.psw + '&usuario=' + this.usuario;
-  // const respuesta =   this.MiServicioGame.httpGet_Game('Registro', parametrosRegistro);
-  //  console.log(respuesta);
   }
 
   ngSubmit(form: NgForm) {
@@ -50,15 +39,34 @@ export class RegistroComponent implements OnInit {
 
   if (form.invalid) { return; }
 
+  Swal.fire({
+    allowOutsideClick: false,
+    type: 'info',
+    text: 'Espere por favor...'
+  });
+  Swal.showLoading();
+
   this.auth.NuevoUsuario(this.unJugador)
   .subscribe( resp => {
 
     console.log(resp);
+    Swal.close();
+
+    if (this.recordarme = true) {
+      localStorage.setItem('email', this.unJugador.email);
+    }
+    this.router.navigateByUrl('/Principal');
 
   }, (err) => {
       console.log(err.error.error.message);
+      Swal.fire({
+        allowOutsideClick: false,
+        type: 'error',
+        title: 'Error al autenticar',
+        text: err.error.error.message
+      });
 
-  })
+  });
 
   }
 }

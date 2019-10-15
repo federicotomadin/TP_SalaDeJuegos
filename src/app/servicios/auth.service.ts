@@ -18,26 +18,28 @@ export class AuthService {
 
   userToken: string;
 
-  private url = 'https://identitytoolkit.googleapis.com/v1/accounts:'
+  private url = 'https://identitytoolkit.googleapis.com/v1/accounts:';
   private apikey = 'AIzaSyB-P7vtT3VkiurKd7M2mityjSj6QrxO1xs';
 
 
-  //Crear nuevo usuario
+  // Crear nuevo usuario
   // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
 
-  //Login
+  // Login
   // https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]
 
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.LeerToken();
+  }
 
   Logout() {}
 
   Login(usuario: Jugador) {
 
     const authData = {
-      ...usuario, 
+      ...usuario,
       returnSecureToken: true
     }
 
@@ -45,7 +47,6 @@ export class AuthService {
     authData
     ).pipe(
       map( resp => {
-        console.log('Entro al map de RXJS');
         this.GuardarToken(resp['idToken']);
         return resp;
       })
@@ -56,34 +57,27 @@ export class AuthService {
   NuevoUsuario(usuario: Jugador) {
 
     const authData = {
-      ...usuario, 
+      ...usuario,
       returnSecureToken: true
-    }
+    };
 
-    return this.http.post(`${ this.url }/accounts:signUp?key=${ this.apikey }`, 
+    return this.http.post(`${ this.url }signUp?key=${ this.apikey }`,
     authData
     ).pipe(
       map( resp => {
-        console.log('Entro al map de RXJS');
         this.GuardarToken(resp['idToken']);
         return resp;
       })
-    )
-
-    
+    );
   }
 
   private GuardarToken(idToken: string) {
 
     this.userToken = idToken;
     localStorage.setItem('token', this.userToken);
-
-
-
   }
 
- LeerToken()
-  {
+ LeerToken() {
     if (localStorage.getItem('token')) {
       this.userToken =  localStorage.getItem('token');
     } else {
@@ -91,7 +85,13 @@ export class AuthService {
     }
 
     return this.userToken;
-
   }
+
+estaAutenticado(): boolean {
+
+  return this.userToken.length > 2;
+}
+
+
 
 }

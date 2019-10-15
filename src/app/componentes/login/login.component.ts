@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+
 import { Jugador } from '../../clases/jugador';
-import { FormBuilder, FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
-
-
-
-
+import Swal from 'sweetalert2';
 import {Subscription} from 'rxjs';
-import {TimerObservable} from 'rxjs/observable/TimerObservable';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,6 +15,7 @@ import {TimerObservable} from 'rxjs/observable/TimerObservable';
 })
 export class LoginComponent implements OnInit {
 
+  recordarme = false;
   private subscription: Subscription;
   usuario = '';
   clave= '';
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   clase= 'progress-bar progress-bar-info progress-bar-striped ';
 
-  constructor(private auth: AuthService, 
+  constructor(private auth: AuthService,
     private route: ActivatedRoute,
     private router: Router) {
       this.progreso = 0;
@@ -38,78 +38,55 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.unJugador = new Jugador();
+
+    if (localStorage.getItem('email')) {
+      this.unJugador.email = localStorage.getItem('email');
+      this.recordarme = true;
+    }
   }
 
   Login(form: NgForm) {
 
     if (form.invalid) { return; }
 
-    this.auth.Login(this.unJugador) 
+   Swal.fire({
+     allowOutsideClick: false,
+     type: 'info',
+     text: 'Espere por favor...'
+   });
+   Swal.showLoading();
+
+    this.auth.Login(this.unJugador)
      .subscribe( resp => {
 
       console.log(resp);
+      Swal.close();
+
+      if (this.recordarme = true) {
+        localStorage.setItem('email', this.unJugador.email);
+      }
+
+      this.router.navigate(['/Principal']);
+
 
      }, (err) => {
 
       console.log(err.error.error.message);
+      Swal.fire({
+        allowOutsideClick: false,
+        type: 'error',
+        title: 'Error al autenticar',
+        text: err.error.error.message
+      });
 
-     })
+     });
     }
-
-  
 
   ngSubmit(form: NgForm) {
-    if (form.invalid) {
-      this.logeando = true;
-    return; }
-    if (this.usuario === 'admin' && this.clave === 'admin') {
-      this.router.navigate(['/Principal']);
+
+    this.Login(form);
+
     }
   }
-  MoverBarraDeProgreso(form: NgForm) {
 
-    if (form.invalid) {
-      this.logeando = true;
-    return; }
-    this.logeando = false;
-    this.clase = 'progress-bar progress-bar-danger progress-bar-striped active';
-    this.progresoMensaje = 'NSA spy...';
-    const timer = TimerObservable.create(200, 50);
-    this.subscription = timer.subscribe(t => {
-      console.log('inicio');
-      this.progreso = this.progreso + 1;
-      this.ProgresoDeAncho = this.progreso + 20 + '%';
-      switch (this.progreso) {
-        case 15:
-        this.clase = 'progress-bar progress-bar-warning progress-bar-striped active';
-        this.progresoMensaje = 'Verificando ADN...';
-          break;
-        case 30:
-          this.clase = 'progress-bar progress-bar-Info progress-bar-striped active';
-          this.progresoMensaje = 'Adjustando encriptación..';
-          break;
-          case 60:
-          this.clase = 'progress-bar progress-bar-success progress-bar-striped active';
-          this.progresoMensaje = 'Recompilando Info del dispositivo..';
-          break;
-          case 75:
-          this.clase = 'progress-bar progress-bar-success progress-bar-striped active';
-          this.progresoMensaje = 'Recompilando claves facebook, gmail, chats..';
-          break;
-          case 85:
-          this.clase = 'progress-bar progress-bar-success progress-bar-striped active';
-          this.progresoMensaje = 'Instalando KeyLogger..';
-          break;
 
-        case 100:
-          console.log('final');
-          this.Login(form);
-          this.subscription.unsubscribe();
-          this.progreso = 0
-          break;
-      }
-    });
-    this.logeando = true;
-  }
-
-}
