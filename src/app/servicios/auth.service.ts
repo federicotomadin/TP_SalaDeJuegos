@@ -2,15 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Jugador } from '../clases/jugador';
 import { map } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { LoginComponent } from '../componentes/login/login.component';
+import { hostViewClassName } from '@angular/compiler';
 
-
-
-// @Pipe({name: 'name'})
-// export class NamePipe implements PipeTransform {
-//   transform(value: any): any {
-//   }
 
 @Injectable()
 
@@ -21,20 +14,14 @@ export class AuthService {
   private url = 'https://identitytoolkit.googleapis.com/v1/accounts:';
   private apikey = 'AIzaSyB-P7vtT3VkiurKd7M2mityjSj6QrxO1xs';
 
-
-  // Crear nuevo usuario
-  // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
-
-  // Login
-  // https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]
-
-
-
   constructor(private http: HttpClient) {
     this.LeerToken();
   }
 
-  Logout() {}
+  Logout() {
+      localStorage.removeItem('token');
+
+  }
 
   Login(usuario: Jugador) {
 
@@ -75,6 +62,13 @@ export class AuthService {
 
     this.userToken = idToken;
     localStorage.setItem('token', this.userToken);
+
+    let hoy = new Date();
+    hoy.setSeconds( 3600 );
+
+    localStorage.setItem('expira', hoy.getTime().toString());
+
+
   }
 
  LeerToken() {
@@ -89,9 +83,19 @@ export class AuthService {
 
 estaAutenticado(): boolean {
 
-  return this.userToken.length > 2;
+  if (this.userToken.length < 2) {
+    return false;
+  } 
+
+  const expira = Number(localStorage.getItem('expira'));
+  const expiraDate = new Date();
+  expiraDate.setTime(expira);
+
+  if (expiraDate > new Date()) {
+    return true;
+    } else {
+      return false;
+    }
+
 }
-
-
-
 }

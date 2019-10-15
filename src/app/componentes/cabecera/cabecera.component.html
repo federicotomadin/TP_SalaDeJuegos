@@ -1,6 +1,6 @@
 <div class="container">
 <div class="panel panel-default">
-    <div class="hero-text"><br>
+    <div class="hero-text"><br><br>
         <h1 style="font-size:50px">Sala de Juegos</h1>
         <p>Federico Tomadin</p>
         <a href="https://github.com/federicotomadin" target="_blank">en GitHub <i class="fa fa-github"></i></a>
@@ -9,8 +9,8 @@
     <!-- <ul class="nav navbar-nav navbar-right"> -->
 
     <ul class="nav navbar navbar-dark bg-dark">
-        <a routerLink="/Registro"><span class="glyphicon glyphicon-user"></span>Registrarse</a>
-        <a routerLink="/Login"><span class="glyphicon glyphicon-log-in"></span> Ingresar</a>
+        <button class="btn btn-outline-primary" (click) = SalirDeLaSesion() style="color: white"><span class="glyphicon glyphicon-user"></span>SALIR</button>
+        <a *ngIf="token" routerLink="/Login" style="color: greenyellow"><span class="glyphicon glyphicon-log-in"></span>{{email}}</a>
     </ul>
 </div>
 </div>
