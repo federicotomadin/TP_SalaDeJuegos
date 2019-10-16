@@ -16,7 +16,6 @@ export class JugadoresListadoComponent implements OnInit {
     }
     
 
-
   ngOnInit() {
   }
 

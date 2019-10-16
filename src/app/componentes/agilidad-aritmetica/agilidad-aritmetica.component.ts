@@ -2,6 +2,7 @@ import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { JuegoAgilidad } from '../../clases/juego-agilidad';
 
 import {Subscription} from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-agilidad-aritmetica',
   templateUrl: './agilidad-aritmetica.component.html',
@@ -24,16 +25,17 @@ export class AgilidadAritmeticaComponent implements OnInit {
   public operadores: string[] = ['+', '-', '*', '/'];
   public respuesta: number;
   public mensajeResultado = '';
+  public contadorJuego = 0;
 
 
   ngOnInit() {
   }
-   constructor() {
+   constructor(private router: Router) {
+    this.contadorJuego = 0;
      this.ocultarVerificar = true;
      this.Tiempo = 10;
     this.nuevoJuego = new JuegoAgilidad();
-    // tslint:disable-next-line:no-console
-    console.info('Inicio agilidad');
+
   }
 
   LimpiarFormulario() {
@@ -67,20 +69,16 @@ export class AgilidadAritmeticaComponent implements OnInit {
 
 
   verificar() {
+    this.contadorJuego =+ 1; 
     console.log('Tu respuesta: ' + this.respuesta);
 
     if (this.nuevoJuego.realizarCuenta() == this.respuesta) {
 
-
-      const juegoGanado = new JuegoAgilidad('', true, localStorage.getItem('email').split('@')[0]);
-      this.enviarJuego.emit(juegoGanado);
-      // const respuesta = this.MiServicioGame.httpGet_Game('ActualizarPuntaje', 'jugador=' + idJugador + '&juego=AgilidadaMasListado&puntaje=1');
-
-      this.mensajeResultado = 'Ganaste';
+      this.enviarJuego.emit(new JuegoAgilidad('', true, localStorage.getItem('email').split('@')[0]));
+      this.mensajeResultado = 'GANASTE';
       // this.LimpiarFormulario();
 
     }
-
     // if (this.nuevoJuego.realizarCuenta() == this.respuesta) {
 
     //   // const idJugador = localStorage.getItem('iDjugadorLogueado');
@@ -92,7 +90,17 @@ export class AgilidadAritmeticaComponent implements OnInit {
     //   this.mensajeResultado = 'Ganaste';
     // }
     else {
-      this.mensajeResultado = '¿Malo para las cuentas?';
+
+      if (this.contadorJuego = 6) {
+        this.mensajeResultado = 'PERDISTE';
+        this.contadorJuego = 0;
+        this.enviarJuego.emit(new JuegoAgilidad('', false, localStorage.getItem('email').split('@')[0]));
+        this.router.navigate(['/Juegos'])
+        
+      } else { 
+        this.mensajeResultado = '¿Malo para las cuentas?' + 'Te quedan ' + (6 - this.contadorJuego) + ' intentos';
+      }
+
     }
 
     document.getElementById('id02').style.display = 'block';
@@ -100,8 +108,6 @@ export class AgilidadAritmeticaComponent implements OnInit {
     this.ocultarVerificar = true;
     clearInterval(this.repetidor);
     this.respuesta = null;
-
-
 
   }
 
