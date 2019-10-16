@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 })
 export class CabeceraComponent implements OnInit {
 
-  token:boolean;
-  email:string;
+  token: boolean;
+  email: string;
 
   constructor(private authService: AuthService, private router: Router) {
   if (localStorage.getItem('token') == '') {
@@ -24,13 +24,11 @@ export class CabeceraComponent implements OnInit {
 
    }
 
-  ngOnInit() { 
+  ngOnInit() {
   }
 
-  SalirDeLaSesion()
-  {
+  SalirDeLaSesion() {
     this.authService.Logout();
     this.router.navigate(['/Login']);
   }
-
 }

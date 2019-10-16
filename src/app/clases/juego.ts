@@ -14,7 +14,7 @@ export abstract class Juego {
     if (jugador) {
       this.jugador = jugador;
     } else {
-      this.jugador = 'natalia natalia';
+      this.jugador = localStorage.getItem('email');
     }
   }
 

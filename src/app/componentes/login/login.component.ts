@@ -71,7 +71,6 @@ export class LoginComponent implements OnInit {
 
      }, (err) => {
 
-      console.log(err.error.error.message);
       Swal.fire({
         allowOutsideClick: false,
         type: 'error',

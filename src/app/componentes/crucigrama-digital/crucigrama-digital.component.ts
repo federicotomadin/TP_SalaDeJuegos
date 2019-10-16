@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import {BG} from './../../clases/boton-grilla';
 import {ProcesaGrilla} from './../../clases/procesa-grilla';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 
-
-import { ModalDirective } from 'ngx-bootstrap/modal';
-
-// ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-crucigrama-digital',
@@ -59,10 +56,10 @@ export class CrucigramaDigitalComponent implements OnInit {
   L0= new BG('L0', 'X'); L1= new BG('L1', 'O'); L2= new BG('L2', 'A'); L3= new BG('L3', 'S'); L4= new BG('L4', 'A'); L5= new BG('L5', 'I'); L6= new BG('L6', 'X'); L7= new BG('L7', 'X'); L8= new BG('L8', 'X'); L9= new BG('L9', 'A');
   M0= new BG('M0', 'X'); M1= new BG('M1', 'C'); M2= new BG('M2', 'G'); M3= new BG('M3', 'S'); M4= new BG('M4', 'A'); M5= new BG('M5', 'L'); M6= new BG('M6', 'X'); M7= new BG('M7', 'X'); M8= new BG('M8', 'X'); M9= new BG('M9', 'P');
   N0= new BG('N0', 'X'); N1= new BG('N1', 'C'); N2= new BG('N2', 'A'); N3= new BG('N3', 'O'); N4= new BG('N4', 'U'); N5= new BG('N5', 'R'); N6= new BG('N6', 'X'); N7= new BG('N7', 'X'); N8= new BG('N8', 'X'); N9= new BG('N9', 'O');
-  P0= new BG('P0', 'X'); P1= new BG('P1', 'S'); P2= new BG('P2', 'E'); P3= new BG('P3', 'U'); P4= new BG('P4', 'L'); P5= new BG('P5', 'E'); P6= new BG('P6', 'X'); P7= new BG('P7', 'X'); P8= new BG('P8', 'X'); P9= new BG('P9', 'M');
+  P0= new BG('P0', 'X'); P1= new BG('P1', 'S'); P2= new BG('P2', 'E'); P3= new BG('P3', 'U'); P4= new BG('P4', 'T'); P5= new BG('P5', 'E'); P6= new BG('P6', 'X'); P7= new BG('P7', 'X'); P8= new BG('P8', 'X'); P9= new BG('P9', 'M');
   Q0= new BG('Q0', 'X'); Q1= new BG('Q1', 'C'); Q2= new BG('Q2', 'A'); Q3= new BG('Q3', 'S'); Q4= new BG('Q4', 'A'); Q5= new BG('Q5', 'A'); Q6= new BG('Q6', 'X'); Q7= new BG('Q7', 'X'); Q8= new BG('Q8', 'X'); Q9= new BG('Q9', 'L');
   R0= new BG('R0', 'R'); R1= new BG('R1', 'k'); R2= new BG('R2', 'L'); R3= new BG('R3', 'A'); R4= new BG('R4', 'X'); R5= new BG('R5', 'R'); R6= new BG('R6', 'X'); R7= new BG('R7', 'X'); R8= new BG('R8', 'X'); R9= new BG('R9', 'E');
-  S0= new BG('S0', 'P'); S1= new BG('S1', 'E'); S2= new BG('S2', 'K'); S3= new BG('S3', 'S'); S4= new BG('S4', 'N'); S5= new BG('S5', 'Z'); S6= new BG('S6', 'X'); S7= new BG('S7', 'X'); S8= new BG('S8', 'X'); S9= new BG('S9', 'B');
+  S0= new BG('S0', 'P'); S1= new BG('S1', 'S'); S2= new BG('S2', 'E'); S3= new BG('S3', 'U'); S4= new BG('S4', 'L'); S5= new BG('S5', 'Z'); S6= new BG('S6', 'X'); S7= new BG('S7', 'X'); S8= new BG('S8', 'X'); S9= new BG('S9', 'B');
 
   linea9 = [this.J0, this.J1, this.J2, this.J3, this.J4, this.J5, this.J6, this.J7, this.J8, this.J9];
   linea10 = [this.K0, this.K1, this.K2, this.K3, this.K4, this.K5, this.K6, this.K7, this.K8, this.K9];
@@ -77,7 +74,7 @@ export class CrucigramaDigitalComponent implements OnInit {
   matrizPrincipal2 = [this.linea9, this.linea10, this.linea11, this.linea12, this.linea13, this.linea14, this.linea15, this.linea16, this.linea17];
 
   respuesta1A = [this.K0, this.L1, this.M2, this.N3, this.P4, this.Q5];
-  respuesta2B = [this.P1, this.P2, this.P3, this.P4];
+  respuesta2B = [this.S1, this.S2, this.S3, this.S4];
   respuesta3C = [this.J0, this.J1, this.J2, this.J3, this.J4, this.J5];
 
   matrizRespuestas2 = [this.respuesta1A, this.respuesta2B, this.respuesta3C];
@@ -241,7 +238,7 @@ juegoDeCero() {
 
   document.getElementById('id05').style.display = 'none';
   this.ganaste = true;
-  this.router.navigate(['/Principal']);
+  this.router.navigate(['/Juegos']);
 
 }
 

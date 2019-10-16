@@ -31,7 +31,7 @@ export class AdivinaElNumeroComponent implements OnInit {
     console.info('numero Secreto:', this.nuevoJuego.gano);
     if (this.nuevoJuego.verificar()) {
 
-      this.enviarJuego.emit(this.nuevoJuego);
+      this.enviarJuego.emit(new JuegoAdivina('', true, localStorage.getItem('email').split('@')[0]));
       this.MostarMensaje('Sos un Genio!!!', true);
       this.nuevoJuego.numeroSecreto = 0;
 
@@ -72,8 +72,7 @@ export class AdivinaElNumeroComponent implements OnInit {
   MostarMensaje(mensaje: string= 'este es el mensaje', ganador: boolean= false) {
     this.Mensajes = mensaje;
     const x = document.getElementById('snackbar');
-    if (ganador)
-      {
+    if (ganador) {
         x.className = 'show Ganador';
       }else {
         x.className = 'show Perdedor';

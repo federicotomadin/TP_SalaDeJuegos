@@ -2,7 +2,6 @@ import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { JuegoAgilidad } from '../../clases/juego-agilidad';
 
 import {Subscription} from 'rxjs';
-import {TimerObservable} from 'rxjs/observable/TimerObservable';
 @Component({
   selector: 'app-agilidad-aritmetica',
   templateUrl: './agilidad-aritmetica.component.html',
@@ -31,14 +30,13 @@ export class AgilidadAritmeticaComponent implements OnInit {
   }
    constructor() {
      this.ocultarVerificar = true;
-     this.Tiempo = 5;
+     this.Tiempo = 10;
     this.nuevoJuego = new JuegoAgilidad();
     // tslint:disable-next-line:no-console
     console.info('Inicio agilidad');
   }
 
-  LimpiarFormulario()
-  {
+  LimpiarFormulario() {
     this.nuevoJuego = new JuegoAgilidad();
     this.pNumero = this.nuevoJuego.primerNumero;
     this.sNumero = this.nuevoJuego.segundoNumero;
@@ -73,7 +71,9 @@ export class AgilidadAritmeticaComponent implements OnInit {
 
     if (this.nuevoJuego.realizarCuenta() == this.respuesta) {
 
-      this.enviarJuego.emit(this.nuevoJuego);
+
+      const juegoGanado = new JuegoAgilidad('', true, localStorage.getItem('email').split('@')[0]);
+      this.enviarJuego.emit(juegoGanado);
       // const respuesta = this.MiServicioGame.httpGet_Game('ActualizarPuntaje', 'jugador=' + idJugador + '&juego=AgilidadaMasListado&puntaje=1');
 
       this.mensajeResultado = 'Ganaste';
