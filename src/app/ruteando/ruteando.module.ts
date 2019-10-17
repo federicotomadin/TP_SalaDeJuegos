@@ -23,13 +23,9 @@ import { JugadoresListadoComponent } from '../componentes/jugadores-listado/juga
 import { CrucigramaDigitalComponent } from '../componentes/crucigrama-digital/crucigrama-digital.component';
 import { AuthGuard } from '../auth.guard';
 
-
-
-
-
 // declaro donde quiero que se dirija
 const MiRuteo = [
-{path: 'Jugadores' , component: JugadoresListadoComponent},
+{path: 'Jugadores', component: JugadoresListadoComponent},
 {path: '' , component: LoginComponent},
 {path: 'Login' , component: LoginComponent},
 {path: 'QuienSoy' , component: QuienSoyComponent},

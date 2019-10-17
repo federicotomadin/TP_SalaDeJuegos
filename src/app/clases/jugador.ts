@@ -1,6 +1,6 @@
 export class Jugador {
 
-    'id': number;
+    'id': string;
 
     'usuario': string;
 

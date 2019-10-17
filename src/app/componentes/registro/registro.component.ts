@@ -5,6 +5,9 @@ import { Jugador } from '../../clases/jugador';
 import { AuthService } from '../../servicios/auth.service';
 import Swal from 'sweetalert2';
 import { Router} from '@angular/router';
+import { JugadoresService } from '../../servicios/jugadores.service';
+import { Observable } from 'rxjs/Observable';
+import { resolve } from 'url';
 
 
 
@@ -23,13 +26,17 @@ export class RegistroComponent implements OnInit {
   usuario = '';
   name = '';
   psw = '';
+
+  resultado: string;
   // private MiHttpService: MiHttpService
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router, private servicioJugadores: JugadoresService) { }
 
   ngOnInit() {
     this.unJugador = new Jugador();
 
+
   }
+
   RegistrarUsuario() {
   this.unJugador = new Jugador();
   }
@@ -45,6 +52,11 @@ export class RegistroComponent implements OnInit {
     text: 'Espere por favor...'
   });
   Swal.showLoading();
+
+   this.servicioJugadores.CrearJugador(this.unJugador)
+   .subscribe( (resp: any) => {
+    console.log(resp);
+  });
 
   this.auth.NuevoUsuario(this.unJugador)
   .subscribe( resp => {

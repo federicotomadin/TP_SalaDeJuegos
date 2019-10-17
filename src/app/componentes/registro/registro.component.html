@@ -18,6 +18,20 @@
         <form (ngSubmit)="ngSubmit( f )" #f="ngForm" class="modal-content animate">
 
             <div class="container">
+
+                <label><b>Id</b></label><br>
+                <span *ngIf="f.submitted && f.controls['id'].errors" class="text-danger animated fadeIn"></span>
+                <input type="text" placeholder="Ingresá tu id" [(ngModel)]="unJugador.id" name="id" disabled>
+                <small class="form-text text-muted">Este campo es autogenerado</small>
+
+                <label><b>Nombre</b></label><br>
+                <span *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger animated fadeIn">El nombre es obligatorio</span>
+                <input type="text" placeholder="Ingresá tu nombre" [(ngModel)]="unJugador.nombre" name="nombre" required>
+
+                <label><b>Apellido</b></label><br>
+                <span *ngIf="f.submitted && f.controls['apellido'].errors" class="text-danger animated fadeIn">El apellido es obligatorio</span>
+                <input type="text" placeholder="Ingresá tu apellido" [(ngModel)]="unJugador.apellido" name="apellido" required>
+
                 <label><b>Email</b></label><br>
                 <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">El correo es obligatorio</span>
                 <input type="text" placeholder="Ingresá tu correo" [(ngModel)]="unJugador.email" name="email" required>
