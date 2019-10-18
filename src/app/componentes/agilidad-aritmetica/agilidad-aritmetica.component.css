@@ -1,9 +1,13 @@
 #titulo {
     text-align: center;
     color: brown;
-    background-color: white;
+    background-image: url("../../../assets/imagenes/cabecera.png");
 }
 
 h2 {
     text-align: center;
+}
+
+.formJuego {
+    background-image: url("../../../assets/imagenes/madera.png");
 }

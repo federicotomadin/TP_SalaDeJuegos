@@ -69,36 +69,23 @@ export class AgilidadAritmeticaComponent implements OnInit {
 
 
   verificar() {
-    this.contadorJuego =+ 1; 
+    this.contadorJuego =  this.contadorJuego +  1;
     console.log('Tu respuesta: ' + this.respuesta);
 
     if (this.nuevoJuego.realizarCuenta() == this.respuesta) {
 
-      this.enviarJuego.emit(new JuegoAgilidad('', true, localStorage.getItem('email').split('@')[0]));
+      this.enviarJuego.emit(new JuegoAgilidad('', true, localStorage.getItem('email').split('@')[0], 10));
       this.mensajeResultado = 'GANASTE';
-      // this.LimpiarFormulario();
+    } else {
 
-    }
-    // if (this.nuevoJuego.realizarCuenta() == this.respuesta) {
-
-    //   // const idJugador = localStorage.getItem('iDjugadorLogueado');
-    //    const idJugador = 5;
-    //   console.log('id' + idJugador);
-    //   this.enviarJuego.emit(this.nuevoJuego);
-    //   // const respuesta = this.MiServicioGame.httpGet_Game('ActualizarPuntaje', 'jugador=' + idJugador + '&juego=AgilidadaMasListado&puntaje=1');
-
-    //   this.mensajeResultado = 'Ganaste';
-    // }
-    else {
-
-      if (this.contadorJuego = 6) {
+      if (this.contadorJuego == 2) {
         this.mensajeResultado = 'PERDISTE';
         this.contadorJuego = 0;
         this.enviarJuego.emit(new JuegoAgilidad('', false, localStorage.getItem('email').split('@')[0]));
-        this.router.navigate(['/Juegos'])
-        
+        // this.router.navigate(['/Juegos']);
+
       } else { 
-        this.mensajeResultado = '¿Malo para las cuentas?' + 'Te quedan ' + (6 - this.contadorJuego) + ' intentos';
+        this.mensajeResultado = '¿Malo para las cuentas? ' + 'Te quedan ' + (2 - this.contadorJuego) + ' intentos';
       }
 
     }
@@ -107,6 +94,7 @@ export class AgilidadAritmeticaComponent implements OnInit {
 
     this.ocultarVerificar = true;
     clearInterval(this.repetidor);
+    this.Tiempo = 10;
     this.respuesta = null;
 
   }

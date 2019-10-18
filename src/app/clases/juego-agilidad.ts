@@ -8,7 +8,7 @@ export class JuegoAgilidad extends Juego {
     respuesta = 0;
 
 
-    constructor(nombre?: string, gano?: boolean, jugador?: string) {
+    constructor(nombre?: string, gano?: boolean, jugador?: string, puntaje?: number) {
         super('Adivina el número', gano, jugador);
         this.primerNumero = Math.floor(Math.random() * 10);
         this.segundoNumero = Math.floor(Math.random() * 10);
