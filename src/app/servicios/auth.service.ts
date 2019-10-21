@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Jugador } from '../clases/jugador';
 import { map } from 'rxjs/operators';
-import { hostViewClassName } from '@angular/compiler';
+import { Router } from '@angular/router';
+
+
+import { Jugador } from '../clases/jugador';
+import { CabeceraComponent } from '../componentes/cabecera/cabecera.component';
+
 
 
 @Injectable()
@@ -11,10 +15,11 @@ export class AuthService {
 
   userToken: string;
 
+
   private url = 'https://identitytoolkit.googleapis.com/v1/accounts:';
   private apikey = 'AIzaSyB-P7vtT3VkiurKd7M2mityjSj6QrxO1xs';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private route: Router, private CabeceraComponent: CabeceraComponent) {
     this.LeerToken();
   }
 
@@ -25,21 +30,31 @@ export class AuthService {
 
   Login(usuario: Jugador) {
 
+    const cabecera = new CabeceraComponent(this, this.route);
+
     const authData = {
       ...usuario,
-      returnSecureToken: true
-    }
+      returnSecureToken: true };
 
-    return this.http.post(`${ this.url }signInWithPassword?key=${ this.apikey }`, 
-    authData
+      this.http.get(`${ this.url }signInWithPassword?key=${ this.apikey }`
+      ).pipe(
+        map( resp => {
+          console.log(resp);
+        })
+      );
+
+    return this.http.post(`${ this.url }signInWithPassword?key=${ this.apikey }`, authData
     ).pipe(
       map( resp => {
+         cabecera.CargarEmail(resp['idToken']);
         this.GuardarToken(resp['idToken']);
         return resp;
       })
-    )
+    );
 
   }
+
+
 
   NuevoUsuario(usuario: Jugador) {
 
@@ -67,8 +82,6 @@ export class AuthService {
     hoy.setSeconds( 3600 );
 
     localStorage.setItem('expira', hoy.getTime().toString());
-
-
   }
 
  LeerToken() {
@@ -83,6 +96,10 @@ export class AuthService {
 
 estaAutenticado(): boolean {
 
+  if ( localStorage.getItem('token') == null) {
+    this.route.navigate(['/Login']);
+  }
+
   if (this.userToken.length < 2) {
     return false;
   }
@@ -96,6 +113,5 @@ estaAutenticado(): boolean {
     } else {
       return false;
     }
-
 }
 }

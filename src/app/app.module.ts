@@ -84,7 +84,7 @@ import { AuthService } from './servicios/auth.service';
     // importo el ruteo
     // RouterModule.forRoot(MiRuteo)
   ],
-  providers: [ JuegoServiceService, MiHttpService, PaisesService, ArchivosJugadoresService, JugadoresService, AuthService],
+  providers: [ JuegoServiceService, MiHttpService, PaisesService, JugadoresService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

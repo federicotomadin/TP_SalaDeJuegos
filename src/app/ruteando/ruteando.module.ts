@@ -25,23 +25,23 @@ import { AuthGuard } from '../auth.guard';
 
 // declaro donde quiero que se dirija
 const MiRuteo = [
-{path: 'Jugadores', component: JugadoresListadoComponent},
+{path: 'Jugadores', component: JugadoresListadoComponent, canActivate: [ AuthGuard ]},
 {path: '' , component: LoginComponent},
 {path: 'Login' , component: LoginComponent},
-{path: 'QuienSoy' , component: QuienSoyComponent},
-{path: 'Registro' , component: RegistroComponent},
+{path: 'QuienSoy' , component: QuienSoyComponent, canActivate: [ AuthGuard ]},
+{path: 'Registro' , component: RegistroComponent, canActivate: [ AuthGuard ]},
 {path: 'Principal' , component: PrincipalComponent, canActivate: [ AuthGuard ]},
-{path: 'Listado' , component: ListadoComponent},
+{path: 'Listado' , component: ListadoComponent, canActivate: [ AuthGuard ]},
 {path: 'Paises' , component: ListadoDePaisesComponent},
 
-{ path: 'Juegos' , component: JuegosComponent,
+{ path: 'Juegos' , component: JuegosComponent, canActivate: [ AuthGuard ],
 children:
      [{path: '' , component: MenuCardComponent},
-     {path: 'Adivina' , component: AdivinaMasListadoComponent},
-      {path: 'AdivinaMasListado' , component: AdivinaMasListadoComponent},
+     {path: 'Adivina' , component: AdivinaMasListadoComponent, canActivate: [ AuthGuard ]},
+      {path: 'AdivinaMasListado' , component: AdivinaMasListadoComponent, canActivate: [ AuthGuard ]},
       {path: 'AgilidadaMasListado' , component: AgilidadMasListadoComponent},
-      {path: 'Agilidad' , component: AgilidadMasListadoComponent},
-      {path: 'CrucigramaDigital' , component: CrucigramaDigitalComponent}]
+      {path: 'Agilidad' , component: AgilidadMasListadoComponent, canActivate: [ AuthGuard ]},
+      {path: 'CrucigramaDigital' , component: CrucigramaDigitalComponent, canActivate: [ AuthGuard ]}]
 },
 {path: '**' , component: ErrorComponent},
 {path: 'error' , component: ErrorComponent}];

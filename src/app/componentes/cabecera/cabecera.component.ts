@@ -13,14 +13,14 @@ export class CabeceraComponent implements OnInit {
   email: string;
 
   constructor(private authService: AuthService, private router: Router) {
-  if (localStorage.getItem('token') == '') {
+  if (localStorage.getItem('token') == null) {
     this.token = false;
 
   } else {
     this.token = true;
   }
 
-  this.email = localStorage.getItem('email');
+  // this.email = localStorage.getItem('email');
 
    }
 
@@ -30,5 +30,11 @@ export class CabeceraComponent implements OnInit {
   SalirDeLaSesion() {
     this.authService.Logout();
     this.router.navigate(['/Login']);
+  }
+
+  CargarEmail(emailEntrante: string) {
+
+   this.email = emailEntrante;
+
   }
 }

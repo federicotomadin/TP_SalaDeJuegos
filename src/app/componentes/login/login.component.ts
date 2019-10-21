@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
 
   unJugador: Jugador;
 
-  clase= 'progress-bar progress-bar-info progress-bar-striped ';
 
   constructor(private auth: AuthService,
     private route: ActivatedRoute,
@@ -58,8 +57,6 @@ export class LoginComponent implements OnInit {
 
     this.auth.Login(this.unJugador)
      .subscribe( resp => {
-
-      console.log(resp);
       Swal.close();
 
       if (this.recordarme = true) {
