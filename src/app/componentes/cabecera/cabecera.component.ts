@@ -20,7 +20,7 @@ export class CabeceraComponent implements OnInit {
     this.token = true;
   }
 
-  // this.email = localStorage.getItem('email');
+  this.email = authService.emailUsuario;
 
    }
 
@@ -32,9 +32,4 @@ export class CabeceraComponent implements OnInit {
     this.router.navigate(['/Login']);
   }
 
-  CargarEmail(emailEntrante: string) {
-
-   this.email = emailEntrante;
-
-  }
 }

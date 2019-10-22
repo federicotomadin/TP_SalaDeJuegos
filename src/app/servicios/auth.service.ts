@@ -1,12 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-
 import { Jugador } from '../clases/jugador';
-import { CabeceraComponent } from '../componentes/cabecera/cabecera.component';
-
 
 
 @Injectable()
@@ -14,47 +11,49 @@ import { CabeceraComponent } from '../componentes/cabecera/cabecera.component';
 export class AuthService {
 
   userToken: string;
+  emailUsuario: string;
 
 
   private url = 'https://identitytoolkit.googleapis.com/v1/accounts:';
   private apikey = 'AIzaSyB-P7vtT3VkiurKd7M2mityjSj6QrxO1xs';
 
-  constructor(private http: HttpClient, private route: Router, private CabeceraComponent: CabeceraComponent) {
+  constructor(private http: HttpClient, private route: Router) {
     this.LeerToken();
   }
 
   Logout() {
       localStorage.removeItem('token');
-
   }
 
   Login(usuario: Jugador) {
-
-    const cabecera = new CabeceraComponent(this, this.route);
 
     const authData = {
       ...usuario,
       returnSecureToken: true };
 
-      this.http.get(`${ this.url }signInWithPassword?key=${ this.apikey }`
-      ).pipe(
-        map( resp => {
-          console.log(resp);
-        })
-      );
-
     return this.http.post(`${ this.url }signInWithPassword?key=${ this.apikey }`, authData
     ).pipe(
       map( resp => {
-         cabecera.CargarEmail(resp['idToken']);
+        // CargarEmail(resp['idToken']);
         this.GuardarToken(resp['idToken']);
+        this.emailUsuario = (resp['email']);
         return resp;
       })
     );
 
   }
 
+  ObtenerUsuario(usuario: Jugador) {
 
+    return this.http.post(`${ this.url }lookup?key=${ this.apikey }`, usuario
+    ).pipe(
+      map( resp => {
+       console.log(resp['email']);
+        this.emailUsuario =  resp['email'];
+      })
+    );
+
+  }
 
   NuevoUsuario(usuario: Jugador) {
 

@@ -34,7 +34,7 @@ const MiRuteo = [
 {path: 'Listado' , component: ListadoComponent, canActivate: [ AuthGuard ]},
 {path: 'Paises' , component: ListadoDePaisesComponent},
 
-{ path: 'Juegos' , component: JuegosComponent, canActivate: [ AuthGuard ],
+{ path: 'Juegos' , component: JuegosComponent,
 children:
      [{path: '' , component: MenuCardComponent},
      {path: 'Adivina' , component: AdivinaMasListadoComponent, canActivate: [ AuthGuard ]},

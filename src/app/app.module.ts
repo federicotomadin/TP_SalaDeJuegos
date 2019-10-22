@@ -17,7 +17,6 @@ import { PaisesService } from './servicios/paises.service';
 import { JugadoresService } from './servicios/jugadores.service';
 import { NgModule } from '@angular/core';
 
-import { ArchivosJugadoresService} from './servicios/archivos-jugadores.service'; 
 import { ErrorComponent } from './componentes/error/error.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { AgilidadAritmeticaComponent } from './componentes/agilidad-aritmetica/agilidad-aritmetica.component';
@@ -26,7 +25,7 @@ import { AdivinaMasListadoComponent } from './componentes/adivina-mas-listado/ad
 import { AgilidadMasListadoComponent } from './componentes/agilidad-mas-listado/agilidad-mas-listado.component';
 import { RuteandoModule } from './ruteando/ruteando.module';
 import { ListadoComponent } from './componentes/listado/listado.component';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 
 import { JugadoresListadoComponent } from './componentes/jugadores-listado/jugadores-listado.component';
 
