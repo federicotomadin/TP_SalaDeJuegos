@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Jugador } from '../clases/jugador';
 import { map } from 'rxjs/operators';
+import { Cliente } from '../clases/cliente';
 
 
 
@@ -13,6 +14,10 @@ export class JugadoresService {
 
   private url = 'https://sala-de-juegos-179b8.firebaseio.com';
   filtrado: any;
+
+  CrearCliente(cliente: Cliente) {
+    return  this.http.post('192.168.2.32:3003', cliente);
+   }
 
 CrearJugador(jugador: Jugador) {
  return  this.http.post(`${this.url}/jugadores.json`, jugador);
