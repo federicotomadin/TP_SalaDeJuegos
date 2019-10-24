@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { JugadoresService } from '../../servicios/jugadores.service';
 import { Jugador } from '../../clases/jugador';
 import { Cliente } from '../../clases/cliente';
+import { ClienteService } from '../../servicios/cliente.service';
 
 @Component({
   selector: 'app-jugadores-listado',
@@ -15,7 +16,7 @@ export class JugadoresListadoComponent implements OnInit {
   miJugadoresServicio: JugadoresService;
   jugadores: Jugador[] = [];
 
-    constructor(private serviceJugadores: JugadoresService) {
+    constructor(private serviceJugadores: JugadoresService, private serviceCliente: ClienteService) {
       this.miJugadoresServicio = serviceJugadores;
 
     }
@@ -25,7 +26,7 @@ export class JugadoresListadoComponent implements OnInit {
 
   CrearJugadores() {
 
-    this.serviceJugadores.CrearCliente(this.cliente)
+    this.serviceCliente.crearCliente(this.cliente)
 
 
   }

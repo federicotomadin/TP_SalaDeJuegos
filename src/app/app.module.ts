@@ -43,6 +43,7 @@ import { InputJugadoresComponent } from './componentes/input-jugadores/input-jug
 import { SexoPipe } from './pipes/sexo.pipe';
 import { CrucigramaDigitalComponent } from './componentes/crucigrama-digital/crucigrama-digital.component';
 import { AuthService } from './servicios/auth.service';
+import { ClienteService } from './servicios/cliente.service';
 
 
 
@@ -83,7 +84,7 @@ import { AuthService } from './servicios/auth.service';
     // importo el ruteo
     // RouterModule.forRoot(MiRuteo)
   ],
-  providers: [ JuegoServiceService, MiHttpService, PaisesService, JugadoresService, AuthService],
+  providers: [ JuegoServiceService, MiHttpService, PaisesService, JugadoresService, AuthService, ClienteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
