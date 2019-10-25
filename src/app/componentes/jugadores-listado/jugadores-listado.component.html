@@ -8,9 +8,23 @@
 
 <div class="container">
 
-  <button type="button"  class="btn btn-primary btn-lg btn-block" (click)="CrearJugadores()">Crear Cliente</button>
+  <button type="button"  class="btn btn-primary btn-lg btn-block" (click)="CrearJugadores()">Crear Cliente</button><br>
 
-</div><br><hr>
+  <button type="button" class="btn btn-success btn-lg btn-block" (click)="LoguearJugador()">Login Cliente</button><br>
+
+  <button type="button" class="btn btn-secondary btn-lg btn-block" (click)="IngresarAuto()">Cargar Auto</button><br><hr>
+
+  
+  <button type="button" (click)='onUpload()' class="btn btn-primary col-md-6 btn-lg">Turno</button>
+  <input 
+  style="display: none;" 
+  type="file" 
+  (changed)="onFileSelectd($event)" 
+  class="col-md-6"
+  #fileInput>
+  <button type="button" (click)="fileInput.click()" class="btn btn-secondary col-md-6 btn-lg">Cargar Archivo</button>
+
+</div><hr>
 
 
 <div class="container">
@@ -25,8 +39,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let jugador of jugadores; let i = index">
-                <th scope="row">{{i + 1}}</th>
+                <!-- let i = index -->
+            <tr *ngFor="let jugador of jugadores">
+                <!-- <th scope="row">{{i + 1}}</th> -->
                 <td>{{jugador.id}}</td>
                 <td>{{jugador.email}} </td>
                 <td>{{jugador.nombre}} </td>

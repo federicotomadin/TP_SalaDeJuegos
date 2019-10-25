@@ -8,6 +8,7 @@ import { Cliente } from '../clases/cliente';
 
 
 
+
 @Injectable()
 export class JugadoresService {
   constructor( private http: HttpClient ) { }
@@ -24,7 +25,7 @@ CrearJugador(jugador: Jugador) {
 }
 
 GetJugadores() {
-  return this.http.get(`${this.url}/jugadores.json`)
+   return this.http.get(`${this.url}/jugadores.json`)
   .pipe(
     map( this.crearArreglo)
 
@@ -32,9 +33,8 @@ GetJugadores() {
 }
 
 private crearArreglo( jugadoresObj: Object) {
-  const jugadores: Jugador[] = [];
-  console.log(jugadores);
-
+  const jugadores: Jugador[] = []
+  // console.log(jugadores);
   if (jugadoresObj === null ) {
     return [];
   }

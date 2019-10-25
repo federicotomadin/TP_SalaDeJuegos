@@ -26,7 +26,7 @@ import { AuthGuard } from '../auth.guard';
 // declaro donde quiero que se dirija
 const MiRuteo = [
 {path: 'Jugadores', component: JugadoresListadoComponent, canActivate: [ AuthGuard ]},
-{path: '' , component: LoginComponent},
+{path: '' , component: LoginComponent, canActivate: [ AuthGuard ]},
 {path: 'Login' , component: LoginComponent},
 {path: 'QuienSoy' , component: QuienSoyComponent, canActivate: [ AuthGuard ]},
 {path: 'Registro' , component: RegistroComponent, canActivate: [ AuthGuard ]},
@@ -39,7 +39,7 @@ children:
      [{path: '' , component: MenuCardComponent},
      {path: 'Adivina' , component: AdivinaMasListadoComponent, canActivate: [ AuthGuard ]},
       {path: 'AdivinaMasListado' , component: AdivinaMasListadoComponent, canActivate: [ AuthGuard ]},
-      {path: 'AgilidadaMasListado' , component: AgilidadMasListadoComponent},
+      {path: 'AgilidadaMasListado' , component: AgilidadMasListadoComponent, canActivate: [ AuthGuard ]},
       {path: 'Agilidad' , component: AgilidadMasListadoComponent, canActivate: [ AuthGuard ]},
       {path: 'CrucigramaDigital' , component: CrucigramaDigitalComponent, canActivate: [ AuthGuard ]}]
 },
