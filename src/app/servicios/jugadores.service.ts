@@ -25,26 +25,9 @@ CrearJugador(jugador: Jugador) {
 }
 
 GetJugadores() {
-   return this.http.get(`${this.url}/jugadores.json`)
-  .pipe(
-    map( this.crearArreglo)
-
-  );
+   return this.http.get(`${this.url}/jugadores.json`);
 }
 
-private crearArreglo( jugadoresObj: Object) {
-  const jugadores: Jugador[] = []
-  // console.log(jugadores);
-  if (jugadoresObj === null ) {
-    return [];
-  }
-
-  Object.keys ( jugadoresObj ).forEach( key => {
-    const jugador: Jugador = jugadoresObj[key];
-    jugador.id = key;
-
-    jugadores.push(jugador);
-  });
 
 }
 
@@ -73,4 +56,4 @@ private crearArreglo( jugadoresObj: Object) {
   //   });
   // }
 
-}
+

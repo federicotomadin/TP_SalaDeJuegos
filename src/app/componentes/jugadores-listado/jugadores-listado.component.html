@@ -39,10 +39,10 @@
             </tr>
         </thead>
         <tbody>
-                <!-- let i = index -->
-            <tr *ngFor="let jugador of jugadores">
-                <!-- <th scope="row">{{i + 1}}</th> -->
-                <td>{{jugador.id}}</td>
+              
+            <tr *ngFor="let jugador of jugadores let i = index" >
+                <th scope="row">{{i + 1}}</th>
+                <!-- <td>{{jugador.id}}</td> -->
                 <td>{{jugador.email}} </td>
                 <td>{{jugador.nombre}} </td>
                 <td>{{jugador.apellido}} </td>

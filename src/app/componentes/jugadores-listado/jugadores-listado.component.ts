@@ -15,7 +15,7 @@ export class JugadoresListadoComponent implements OnInit {
 
   listado: any;
   miJugadoresServicio: JugadoresService;
-  @Input()
+  @Output()
   jugadores: Jugador[] = [];
   jugador: Jugador;
 
@@ -39,7 +39,6 @@ export class JugadoresListadoComponent implements OnInit {
     }
 
 
-
   CrearJugadores() {
 
     this.serviceCliente.crearCliente(this.cliente)
@@ -60,14 +59,28 @@ export class JugadoresListadoComponent implements OnInit {
 
 
   ngOnInit() {
-    this.serviceJugadores.GetJugadores()
+     this.serviceJugadores.GetJugadores()
     .subscribe( resp =>  {
       console.log(resp);
-      // this.jugador = new Jugador(resp['apellido'],resp['email'],resp['nombre'],resp['password'],resp['puntaje']);
-      // this.jugadores.push(this.jugador);
-     
+      this.crearArreglo(resp);
+          
     } );
   }
+
+private crearArreglo( jugadoresObj: Object) {
+  // console.log(jugadores);
+  if (jugadoresObj === null ) {
+    return [];
+  }
+
+  Object.keys ( jugadoresObj ).forEach( key => {
+    const jugador: Jugador = jugadoresObj[key];
+    jugador.id = key;
+
+    this.jugadores.push(jugador);
+  });
+
+}
 
 
   // TraerTodos(){

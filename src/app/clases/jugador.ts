@@ -6,7 +6,7 @@ export class Jugador {
     public nombre? = 'sinNombre';
     public apellido? = 'sinApellido';
     public password? = 'sinPass';
-    public puntaje? = 'sinPuntaje';
+    public puntaje? = '0';
 
     constructor(id?:string, usuario?:string, email?:string, nombre?:string, apellido?:string, password?:string, puntaje?:string)
     {
