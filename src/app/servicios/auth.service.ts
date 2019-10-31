@@ -77,7 +77,7 @@ export class AuthService {
     this.userToken = idToken;
     localStorage.setItem('token', this.userToken);
 
-    let hoy = new Date();
+    const hoy = new Date();
     hoy.setSeconds( 3600 );
 
     localStorage.setItem('expira', hoy.getTime().toString());
@@ -95,7 +95,7 @@ export class AuthService {
 
 estaAutenticado(): boolean {
 
-  if ( localStorage.getItem('token') == null) {
+  if ( localStorage.getItem('token') == null ) {
     this.route.navigate(['/Login']);
   }
 

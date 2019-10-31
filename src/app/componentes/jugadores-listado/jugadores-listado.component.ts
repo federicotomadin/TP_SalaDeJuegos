@@ -24,7 +24,7 @@ export class JugadoresListadoComponent implements OnInit {
 
     }
 
-    cliente = new Cliente('Federico', '1234')
+    cliente = new Cliente('Federico', '1234');
     auto = new auto();
 
     selectedFile: File = null;
@@ -38,11 +38,8 @@ export class JugadoresListadoComponent implements OnInit {
 
     }
 
-
   CrearJugadores() {
-
-    this.serviceCliente.crearCliente(this.cliente)
-
+    this.serviceCliente.crearCliente(this.cliente);
   }
 
   LoguearJugador() {
@@ -63,7 +60,6 @@ export class JugadoresListadoComponent implements OnInit {
     .subscribe( resp =>  {
       console.log(resp);
       this.crearArreglo(resp);
-          
     } );
   }
 

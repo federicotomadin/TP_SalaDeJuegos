@@ -15,24 +15,24 @@ export class ClienteService {
 
 token: string;
  headers: HttpHeaders;
-  crearCliente(cliente: Cliente){
+  crearCliente(cliente: Cliente) {
    /*  Cliente={user:"pepe", pass:"123"} https://github.com/MarioAr/servidor-prueba-front*/
    console.log(JSON.stringify(cliente));
    return this.http.post('http://127.0.0.1:3003/clientes', {cliente})
-   .subscribe(resp =>{
+   .subscribe(resp => {
       console.log(resp);
     });
   }
 
-devolverCliente(cliente: Cliente){
+devolverCliente(cliente: Cliente) {
   /*  Cliente{user:"pepe", pass:"123"} */
  /*  return this.http.get('' ); */
 }
 
-loguearCliente(cliente: Cliente){
+loguearCliente(cliente: Cliente) {
   /*  Cliente{user:"pepe", pass:"123"} */
   return this.http.post('http://127.0.0.1:3003/Login', {cliente})
-  .subscribe(resp =>{
+  .subscribe(resp => {
 
     this.token = resp['token'];
     this.headers = new HttpHeaders({

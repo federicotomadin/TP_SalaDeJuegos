@@ -41,7 +41,7 @@ children:
       {path: 'AdivinaMasListado' , component: AdivinaMasListadoComponent, canActivate: [ AuthGuard ]},
       {path: 'AgilidadaMasListado' , component: AgilidadMasListadoComponent, canActivate: [ AuthGuard ]},
       {path: 'Agilidad' , component: AgilidadMasListadoComponent, canActivate: [ AuthGuard ]},
-      {path: 'CrucigramaDigital' , component: CrucigramaDigitalComponent, canActivate: [ AuthGuard ]}]
+      {path: 'CrucigramaDigital' , component: CrucigramaDigitalComponent, canActivate: [ AuthGuard ]}],
 },
 {path: '**' , component: ErrorComponent},
 {path: 'error' , component: ErrorComponent}];

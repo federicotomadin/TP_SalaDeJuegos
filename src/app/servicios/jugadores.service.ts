@@ -5,20 +5,21 @@ import { HttpClient } from '@angular/common/http';
 import { Jugador } from '../clases/jugador';
 import { map } from 'rxjs/operators';
 import { Cliente } from '../clases/cliente';
+import { AuthService } from './auth.service';
 
 
 
 
 @Injectable()
 export class JugadoresService {
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, authService: AuthService ) { }
 
   private url = 'https://sala-de-juegos-179b8.firebaseio.com';
+  private apikey = 'AIzaSyB-P7vtT3VkiurKd7M2mityjSj6QrxO1xs';
   filtrado: any;
+  emailUsuario: string;
+  idUsuario: string;
 
-  CrearCliente(cliente: Cliente) {
-    return  this.http.post('192.168.2.32:3003', cliente);
-   }
 
 CrearJugador(jugador: Jugador) {
  return  this.http.post(`${this.url}/jugadores.json`, jugador);
@@ -26,6 +27,18 @@ CrearJugador(jugador: Jugador) {
 
 GetJugadores() {
    return this.http.get(`${this.url}/jugadores.json`);
+}
+
+AtualizarPuntaje(usuario: Jugador) {
+
+   this.http.post(`${ this.url }lookup?key=${ this.apikey }`, usuario
+  ).pipe(
+    map( resp => {
+      this.idUsuario = resp['id'];
+    })
+  );
+
+  this.http.put(`${this.url}/jugadores/${this.idUsuario}.json`, usuario);
 }
 
 
