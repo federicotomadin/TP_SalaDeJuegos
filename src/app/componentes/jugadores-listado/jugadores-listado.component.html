@@ -12,8 +12,10 @@
 
 
     <button type="button" (click)='onUpload()' class="btn btn-primary col-md-6 btn-lg">UpLoad</button>
-    <input  type="file" (change)="onFileSelectd($event)" class="col-md-6" #fileInput>
-    <button type="button" (click)="fileInput.click()" class="btn btn-secondary col-md-6 btn-lg">Cargar Archivo</button>
+    <input style="display: none;" type="file" (change)="onFileSelectd($event)" class="col-md-6" name="fileInput" #fileInput/>
+    <button type="button" (click)="fileInput.click()" class="btn btn-secondary col-md-6 btn-lg">Cargar Archivo</button><br>
+    <a href="{{urlPublica}}" target="_blank" [(ngModel)]="name" ngDefaultControl>urlPublica</a>
+   
 
 </div>
 <hr>

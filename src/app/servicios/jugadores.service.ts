@@ -27,7 +27,6 @@ export class JugadoresService {
 token: string;
 headers: HttpHeaders;
 
-
 CrearJugador(jugador: Jugador) {
  return  this.http.post(`${this.url}/jugadores.json`, jugador);
 }
@@ -48,17 +47,17 @@ AtualizarPuntaje(usuario: Jugador) {
   this.http.put(`${this.url}/jugadores/${this.idUsuario}.json`, usuario);
 }
 
-public subirArchivo(file): Observable<string> {
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('fileName', file.name);
-  this.headers = new HttpHeaders({
-   'Content-Type': 'application/json',
-   'token': localStorage.getItem('token')
-  });
-  return this.http.post(this.urlStorage, formData)
-  .map(resp => resp.text());
-}
+// public subirArchivo(file): Observable<string> {
+//   const formData = new FormData();
+//   formData.append('file', file);
+//   formData.append('fileName', file.name);
+//   this.headers = new HttpHeaders({
+//    'Content-Type': 'application/json',
+//    'token': localStorage.getItem('token')
+//   });
+//   return this.http.post(this.urlStorage, formData)
+//   .map(resp => resp.text());
+// }
 
 }
 

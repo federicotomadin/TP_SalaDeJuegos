@@ -7,6 +7,9 @@ import { Cliente } from '../../clases/cliente';
 import { ClienteService } from '../../servicios/cliente.service';
 import { auto } from '../../clases/auto';
 import { FirebaseStorageService } from '../../servicios/firebase-storage.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-jugadores-listado',
@@ -21,7 +24,8 @@ export class JugadoresListadoComponent implements OnInit {
   jugadores: Jugador[] = [];
   jugador: Jugador;
 
-    constructor(private serviceFireStorage: FirebaseStorageService, private serviceJugadores: JugadoresService, private serviceCliente: ClienteService) {
+    constructor(private serviceFireStorage: FirebaseStorageService, private serviceJugadores: JugadoresService, 
+      private serviceCliente: ClienteService, private storage: AngularFireStorage) {
       this.miJugadoresServicio = serviceJugadores;
 
     }
@@ -29,18 +33,34 @@ export class JugadoresListadoComponent implements OnInit {
     cliente = new Cliente('Federico', '1234');
     auto = new auto();
     urlPublica: string;
+    upload: any;
 
     selectedFile: File = null;
+
 
     public onFileSelectd($event) {
 
       if ($event.target.files.length === 1) {
-         this.serviceFireStorage.referenciaCloudStorage($event.target.files[0].name).getDownloadURL()
-         .subscribe((URL) => {
-          this.urlPublica = URL;
+        this.serviceFireStorage.referenciaCloudStorage($event.target.files[0].name).getDownloadURL()
+         .subscribe(resp  => {
+           this.urlPublica = resp;
+  
+          Swal.fire({
+            allowOutsideClick: false,
+            type: 'info',
+            text: 'Imagen cargada con exito'
+  });  
+        }, (error) => {
+          // Handle error here
+          // Show popup with errors or just console.error
+          console.error(error);
+      
+        
         });
 
          this.serviceFireStorage.tareaCloudStorage($event.target.files[0].name, $event.target.files[0]);
+         
+       
 
 
       //   this.serviceJugadores.subirArchivo($event.target.files[0]).subscribe(response => {
@@ -50,20 +70,17 @@ export class JugadoresListadoComponent implements OnInit {
       //         console.error(error);
       //     });
       // }
-
-
   }
 
 }
 
+    // onUpload($event) {
 
-    onUpload($event) {
-
-      this.serviceJugadores.subirArchivo($event.target.files[0])
-      .subscribe(response => {
-        console.log(response);
-    });
-    }
+    //   this.serviceJugadores.subirArchivo($event.target.files[0])
+    //   .subscribe(response => {
+    //     console.log(response);
+    // });
+    // }
 
   CrearJugadores() {
     this.serviceCliente.crearCliente(this.cliente);
