@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit, Output, Input } from '@angular/core';
 
 import { JugadoresService } from '../../servicios/jugadores.service';
@@ -5,6 +6,7 @@ import { Jugador } from '../../clases/jugador';
 import { Cliente } from '../../clases/cliente';
 import { ClienteService } from '../../servicios/cliente.service';
 import { auto } from '../../clases/auto';
+import { FirebaseStorageService } from '../../servicios/firebase-storage.service';
 
 @Component({
   selector: 'app-jugadores-listado',
@@ -19,23 +21,48 @@ export class JugadoresListadoComponent implements OnInit {
   jugadores: Jugador[] = [];
   jugador: Jugador;
 
-    constructor(private serviceJugadores: JugadoresService, private serviceCliente: ClienteService) {
+    constructor(private serviceFireStorage: FirebaseStorageService, private serviceJugadores: JugadoresService, private serviceCliente: ClienteService) {
       this.miJugadoresServicio = serviceJugadores;
 
     }
 
     cliente = new Cliente('Federico', '1234');
     auto = new auto();
+    urlPublica: string;
 
     selectedFile: File = null;
-    onFileSelected(event) {
-      this.selectedFile = <File>event.target.files[0];
-    }
 
-    onUpload() {
+    public onFileSelectd($event) {
 
-      this.serviceCliente.CargarArchivo(this.selectedFile);
+      if ($event.target.files.length === 1) {
+         this.serviceFireStorage.referenciaCloudStorage($event.target.files[0].name).getDownloadURL()
+         .subscribe((URL) => {
+          this.urlPublica = URL;
+        });
 
+         this.serviceFireStorage.tareaCloudStorage($event.target.files[0].name, $event.target.files[0]);
+
+
+      //   this.serviceJugadores.subirArchivo($event.target.files[0]).subscribe(response => {
+      //         console.log(response);
+      //     },
+      //     error => {
+      //         console.error(error);
+      //     });
+      // }
+
+
+  }
+
+}
+
+
+    onUpload($event) {
+
+      this.serviceJugadores.subirArchivo($event.target.files[0])
+      .subscribe(response => {
+        console.log(response);
+    });
     }
 
   CrearJugadores() {

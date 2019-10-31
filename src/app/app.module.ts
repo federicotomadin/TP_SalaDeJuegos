@@ -45,6 +45,10 @@ import { CrucigramaDigitalComponent } from './componentes/crucigrama-digital/cru
 import { AuthService } from './servicios/auth.service';
 import { ClienteService } from './servicios/cliente.service';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
+
 
 
 @NgModule({
@@ -79,6 +83,8 @@ import { ClienteService } from './servicios/cliente.service';
     RuteandoModule,
     HttpModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
     // RouterModule.forRoot([])
     // NgbModule.forRoot(MiRuteo),
     // importo el ruteo

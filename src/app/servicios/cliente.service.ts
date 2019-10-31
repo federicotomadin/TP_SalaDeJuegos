@@ -52,7 +52,7 @@ CargarAuto(auto: auto) {
 
 
 CargarArchivo(archivo: File) {
- 
+
   const fd = new FormData();
   fd.append('image', archivo, archivo.name);
   this.http.post('', fd, {
@@ -64,8 +64,8 @@ CargarArchivo(archivo: File) {
        console.log('Update Progress:', Math.round(event.loaded/event.total) + '%')
      } else if (event.type === HttpEventType.Response) {
         console.log(event);
-     }  
-  })
+     }
+  });
 
 
 }

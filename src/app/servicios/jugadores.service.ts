@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 // import { ArchivosJugadoresService} from './archivos-jugadores.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Jugador } from '../clases/jugador';
 import { map } from 'rxjs/operators';
 import { Cliente } from '../clases/cliente';
 import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
+import { RequestOptions } from '@angular/http';
 
 
 
@@ -15,10 +17,15 @@ export class JugadoresService {
   constructor( private http: HttpClient, authService: AuthService ) { }
 
   private url = 'https://sala-de-juegos-179b8.firebaseio.com';
+
+  private urlStorage = 'gs://sala-de-juegos-179b8.appspot.com';
   private apikey = 'AIzaSyB-P7vtT3VkiurKd7M2mityjSj6QrxO1xs';
   filtrado: any;
   emailUsuario: string;
   idUsuario: string;
+
+token: string;
+headers: HttpHeaders;
 
 
 CrearJugador(jugador: Jugador) {
@@ -41,32 +48,21 @@ AtualizarPuntaje(usuario: Jugador) {
   this.http.put(`${this.url}/jugadores/${this.idUsuario}.json`, usuario);
 }
 
+public subirArchivo(file): Observable<string> {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('fileName', file.name);
+  this.headers = new HttpHeaders({
+   'Content-Type': 'application/json',
+   'token': localStorage.getItem('token')
+  });
+  return this.http.post(this.urlStorage, formData)
+  .map(resp => resp.text());
+}
 
 }
 
-  // traertodos(ruta: string, filtro: string) {
-  //   return this.miHttp.traerJugadores(ruta).then(data => {
-  //     console.info('jugadores service', data);
-
-  //     this.filtrado = data;
-
-  //    let  ganador: boolean;
-  //     if (filtro === 'ganadores')
-  //     {
-  //       ganador = true;
-  //     } else {
-  //       ganador = false;
-  //     }
-
-  //     this.filtrado = this.filtrado.filter(
-  //       data => data.gano === ganador  || filtro === 'todos' ); return this.filtrado; }
-  //     )
-  //     .catch(errror => {console.log('error');
-
-  //   return this.filtrado;
 
 
-  //   });
-  // }
 
 
