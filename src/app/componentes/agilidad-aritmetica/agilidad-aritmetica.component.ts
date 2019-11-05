@@ -3,6 +3,7 @@ import { JuegoAgilidad } from '../../clases/juego-agilidad';
 
 import {Subscription} from 'rxjs';
 import { Router } from '@angular/router';
+import { JugadoresService } from '../../servicios/jugadores.service';
 @Component({
   selector: 'app-agilidad-aritmetica',
   templateUrl: './agilidad-aritmetica.component.html',
@@ -30,7 +31,7 @@ export class AgilidadAritmeticaComponent implements OnInit {
 
   ngOnInit() {
   }
-   constructor(private router: Router) {
+   constructor(private router: Router, private servicioJugador: JugadoresService) {
     this.contadorJuego = 0;
      this.ocultarVerificar = true;
      this.Tiempo = 10;
@@ -76,13 +77,14 @@ export class AgilidadAritmeticaComponent implements OnInit {
 
       this.enviarJuego.emit(new JuegoAgilidad('', true, localStorage.getItem('email').split('@')[0], 10));
       this.mensajeResultado = 'GANASTE';
+      this.servicioJugador.ActualizarPuntaje('20', localStorage.getItem('email'));
+
     } else {
 
       if (this.contadorJuego == 2) {
         this.mensajeResultado = 'PERDISTE';
         this.contadorJuego = 0;
         this.enviarJuego.emit(new JuegoAgilidad('', false, localStorage.getItem('email').split('@')[0]));
-        // this.router.navigate(['/Juegos']);
 
       } else { 
         this.mensajeResultado = '¿Malo para las cuentas? ' + 'Te quedan ' + (2 - this.contadorJuego) + ' intentos';

@@ -1,4 +1,3 @@
-import { Subscription } from 'rxjs';
 import { Component, OnInit, Output, Input } from '@angular/core';
 
 import { JugadoresService } from '../../servicios/jugadores.service';
@@ -20,8 +19,8 @@ export class JugadoresListadoComponent implements OnInit {
 
   listado: any;
   miJugadoresServicio: JugadoresService;
-  @Output()
   jugadores: Jugador[] = [];
+  @Output()
   jugador: Jugador;
 
     constructor(private serviceFireStorage: FirebaseStorageService, private serviceJugadores: JugadoresService,
@@ -32,7 +31,6 @@ export class JugadoresListadoComponent implements OnInit {
 
     cliente = new Cliente('Federico', '1234');
 
-    jugadorActualizar: Jugador = new Jugador('1', 'marcelo@gmail.com', 'Marcelo', 'Sartor', '123456', '20');
     auto = new auto();
     urlPublica: string;
     upload: any;
@@ -53,8 +51,6 @@ export class JugadoresListadoComponent implements OnInit {
             text: 'Imagen cargada con exito'
   });
         }, (error) => {
-          // Handle error here
-          // Show popup with errors or just console.error
           console.error(error);
         });
 
@@ -98,11 +94,7 @@ export class JugadoresListadoComponent implements OnInit {
 
 
   ngOnInit() {
-     this.serviceJugadores.GetJugadores()
-    .subscribe( resp =>  {
-      console.log(resp);
-      this.crearArreglo(resp);
-    } );
+    this.ActualizarJugador();
   }
 
 private crearArreglo( jugadoresObj: Object) {
@@ -113,7 +105,7 @@ private crearArreglo( jugadoresObj: Object) {
 
   Object.keys ( jugadoresObj ).forEach( key => {
     const jugador: Jugador = jugadoresObj[key];
-    jugador.id = key;
+    // jugador.id = key;
 
     this.jugadores.push(jugador);
   });
@@ -122,9 +114,16 @@ private crearArreglo( jugadoresObj: Object) {
 
 ActualizarJugador() {
 
-  this.serviceJugadores.ActualizarPuntaje(this.jugadorActualizar);
-  this.serviceJugadores.GetJugadores();
+  // this.serviceJugadores.ActualizarPuntaje('20',localStorage.getItem('email'));
+  this.LimpiarArreglo();
+  this.serviceJugadores.GetJugadores()
+  .subscribe( resp =>  {
+    this.crearArreglo(resp);
+  });
+}
 
+LimpiarArreglo() {
+  this.jugadores.splice(0);
 }
 
 

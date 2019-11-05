@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {BG} from './../../clases/boton-grilla';
 import {ProcesaGrilla} from './../../clases/procesa-grilla';
 import { Router } from '@angular/router';
+import { JugadoresService } from '../../servicios/jugadores.service';
 
 
 @Component({
@@ -116,7 +117,7 @@ export class CrucigramaDigitalComponent implements OnInit {
   crearDetalleModal: boolean;
 
 
-  constructor(private modalService: NgbModal, private router: Router) {
+  constructor(private modalService: NgbModal, private router: Router, private servicioJugadores: JugadoresService) {
    }
 
   clasesBotones = {'btnPresionado': false, 'btnNormal': true};
@@ -165,6 +166,7 @@ export class CrucigramaDigitalComponent implements OnInit {
       if (this.palabrasEncontradas === 3) {
         this.ganaste = true;
         document.getElementById('id05').style.display = 'block';
+        this.servicioJugadores.ActualizarPuntaje('20', localStorage.getItem('email'));
       } else {
       document.getElementById('id04').style.display = 'block';
       }

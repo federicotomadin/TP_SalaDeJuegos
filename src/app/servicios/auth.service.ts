@@ -36,6 +36,7 @@ export class AuthService {
       map( resp => {
         // CargarEmail(resp['idToken']);
         this.GuardarToken(resp['idToken']);
+        console.log(resp);
         this.emailUsuario = (resp['email']);
         return resp;
       })

@@ -6,8 +6,9 @@ import { Jugador } from '../clases/jugador';
 import { map } from 'rxjs/operators';
 import { Cliente } from '../clases/cliente';
 import { AuthService } from './auth.service';
-import { Observable } from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import { RequestOptions } from '@angular/http';
+import Swal from 'sweetalert2';
 
 
 @Injectable()
@@ -33,11 +34,36 @@ GetJugadores() {
    return this.http.get(`${this.url}/jugadores.json`);
 }
 
-ActualizarPuntaje(usuario: Jugador) {
+ActualizarPuntaje(puntaje: string, email: string) {
 
- return  this.http.put(`${this.url}/jugadores/${usuario.id}.json`, usuario)
- .subscribe(resp =>
-  console.log(resp));
+  var usuario: Jugador;
+  var  puntajeNuevo: number;
+ return  this.http.get(`${this.url}/jugadores.json`)
+  .subscribe(resp => {
+    Object.keys (resp).forEach(key => {
+        const jugador: Jugador = resp[key];
+
+        if(jugador['email'] == email) {
+   
+          puntajeNuevo = parseInt(puntaje) + parseInt(jugador.puntaje);
+
+          usuario = new Jugador(jugador.email,jugador.nombre, jugador.apellido, jugador.password, String(puntajeNuevo));
+
+          this.http.put(`${this.url}/jugadores/${key}.json`, usuario)
+          .subscribe(resp => 
+            console.log(resp));
+
+          Swal.fire(
+            'Actualizado',
+            'Puntaje actualizado con éxito',
+            'success'
+          )
+          }
+    })
+
+  });
+
+   
 }
 
 ObtenerJugadorActual() {

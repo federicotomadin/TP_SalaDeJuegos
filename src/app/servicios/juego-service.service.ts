@@ -9,7 +9,6 @@ export class JuegoServiceService {
   peticion: any;
   constructor( public miHttp: MiHttpService ) {
     this.peticion = this.miHttp.httpGetO('http://localhost:3003');
-//    this.peticion = this.miHttp.httpGetO("https://restcountries.eu/rest/v2/all");
   }
 
   public listar(): Array<Juego> {
@@ -20,7 +19,6 @@ export class JuegoServiceService {
     .catch( err => {
       console.log( err );
     });
-
 
     this.peticion
     .subscribe( data => {

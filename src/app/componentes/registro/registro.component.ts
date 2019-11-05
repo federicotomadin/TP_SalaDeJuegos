@@ -33,12 +33,11 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit() {
     this.unJugador = new Jugador();
-
-
   }
 
   RegistrarUsuario() {
   this.unJugador = new Jugador();
+  this.unJugador.puntaje = '0';
   }
 
   ngSubmit(form: NgForm) {
@@ -53,21 +52,20 @@ export class RegistroComponent implements OnInit {
   });
   Swal.showLoading();
 
-   this.servicioJugadores.CrearJugador(this.unJugador)
+  this.unJugador.puntaje = '0';
+  this.servicioJugadores.CrearJugador(this.unJugador)
    .subscribe( (resp: any) => {
-    console.log(resp);
   });
 
   this.auth.NuevoUsuario(this.unJugador)
   .subscribe( resp => {
 
-    console.log(resp);
     Swal.close();
 
     if (this.recordarme = true) {
       localStorage.setItem('email', this.unJugador.email);
     }
-    this.router.navigateByUrl('/Principal');
+    this.router.navigateByUrl('/Login');
 
   }, (err) => {
       console.log(err.error.error.message);
