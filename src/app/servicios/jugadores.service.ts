@@ -10,8 +10,6 @@ import { Observable } from 'rxjs';
 import { RequestOptions } from '@angular/http';
 
 
-
-
 @Injectable()
 export class JugadoresService {
   constructor( private http: HttpClient, authService: AuthService ) { }
@@ -35,29 +33,16 @@ GetJugadores() {
    return this.http.get(`${this.url}/jugadores.json`);
 }
 
-AtualizarPuntaje(usuario: Jugador) {
+ActualizarPuntaje(usuario: Jugador) {
 
-   this.http.post(`${ this.url }lookup?key=${ this.apikey }`, usuario
-  ).pipe(
-    map( resp => {
-      this.idUsuario = resp['id'];
-    })
-  );
-
-  this.http.put(`${this.url}/jugadores/${this.idUsuario}.json`, usuario);
+ return  this.http.put(`${this.url}/jugadores/${usuario.id}.json`, usuario)
+ .subscribe(resp =>
+  console.log(resp));
 }
 
-// public subirArchivo(file): Observable<string> {
-//   const formData = new FormData();
-//   formData.append('file', file);
-//   formData.append('fileName', file.name);
-//   this.headers = new HttpHeaders({
-//    'Content-Type': 'application/json',
-//    'token': localStorage.getItem('token')
-//   });
-//   return this.http.post(this.urlStorage, formData)
-//   .map(resp => resp.text());
-// }
+ObtenerJugadorActual() {
+  return this.http.get(`${this.url}/jugadores.json`);
+}
 
 }
 

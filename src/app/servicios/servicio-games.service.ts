@@ -33,33 +33,23 @@ export class ServicioGamesService {
         console.log(this.unaRespuesta.token);
         localStorage.setItem('token', this.unaRespuesta.token);
         this.unJugador = this.unaRespuesta.elJugador;
-        localStorage.setItem('jugadorLogueado', this.unJugador.usuario);
+        // localStorage.setItem('jugadorLogueado', this.unJugador.usuario);
         localStorage.setItem('iDjugadorLogueado', this.unJugador.id.toString());
       });
-    }
-    else if (tarea === 'Registro')
-    {
+    } else if (tarea === 'Registro') {
       this.respuestaGenerica = this.servicioGenerico.RegistrarUsuario('registro' + parametro);
-    }
-    else if (tarea === 'Listado')
-    {
+    } else if (tarea === 'Listado') {
       this.respuestaGenerica = this.servicioGenerico.TraeListado('listado');
-    }
-    else if (tarea === 'ActualizarPuntaje')
-    {
+    } else if (tarea === 'ActualizarPuntaje') {
       this.respuestaGenerica = this.servicioGenerico.ActualizarPuntajeJugador(parametro);
-    }
-    else if (tarea === 'ListadoResultados')
-    {
+    } else if (tarea === 'ListadoResultados') {
       this.respuestaGenerica = this.servicioGenerico.TraerPuntajes();
       // .then((listado:any[])=>{
 
       //   console.log(listado);
 
       // })
-    }
-    else
-    {
+    } else {
       console.log('No sabemos qué quiere hacer hacer');
     }
     return this.respuestaGenerica;

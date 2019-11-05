@@ -24,13 +24,15 @@ export class JugadoresListadoComponent implements OnInit {
   jugadores: Jugador[] = [];
   jugador: Jugador;
 
-    constructor(private serviceFireStorage: FirebaseStorageService, private serviceJugadores: JugadoresService, 
+    constructor(private serviceFireStorage: FirebaseStorageService, private serviceJugadores: JugadoresService,
       private serviceCliente: ClienteService, private storage: AngularFireStorage) {
       this.miJugadoresServicio = serviceJugadores;
 
     }
 
     cliente = new Cliente('Federico', '1234');
+
+    jugadorActualizar: Jugador = new Jugador('1', 'marcelo@gmail.com', 'Marcelo', 'Sartor', '123456', '20');
     auto = new auto();
     urlPublica: string;
     upload: any;
@@ -44,23 +46,19 @@ export class JugadoresListadoComponent implements OnInit {
         this.serviceFireStorage.referenciaCloudStorage($event.target.files[0].name).getDownloadURL()
          .subscribe(resp  => {
            this.urlPublica = resp;
-  
-          Swal.fire({
+
+         Swal.fire({
             allowOutsideClick: false,
             type: 'info',
             text: 'Imagen cargada con exito'
-  });  
+  });
         }, (error) => {
           // Handle error here
           // Show popup with errors or just console.error
           console.error(error);
-      
-        
         });
 
          this.serviceFireStorage.tareaCloudStorage($event.target.files[0].name, $event.target.files[0]);
-         
-       
 
 
       //   this.serviceJugadores.subirArchivo($event.target.files[0]).subscribe(response => {
@@ -88,7 +86,7 @@ export class JugadoresListadoComponent implements OnInit {
 
   LoguearJugador() {
 
-    this.serviceCliente.loguearCliente(this.cliente)
+    this.serviceCliente.loguearCliente(this.cliente);
 
   }
 
@@ -119,6 +117,13 @@ private crearArreglo( jugadoresObj: Object) {
 
     this.jugadores.push(jugador);
   });
+
+}
+
+ActualizarJugador() {
+
+  this.serviceJugadores.ActualizarPuntaje(this.jugadorActualizar);
+  this.serviceJugadores.GetJugadores();
 
 }
 
