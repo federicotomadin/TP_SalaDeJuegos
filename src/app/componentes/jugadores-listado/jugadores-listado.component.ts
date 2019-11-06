@@ -8,6 +8,10 @@ import { auto } from '../../clases/auto';
 import { FirebaseStorageService } from '../../servicios/firebase-storage.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import Swal from 'sweetalert2';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import { UserOptions } from 'jspdf-autotable';
+
 
 
 @Component({
@@ -109,7 +113,6 @@ private crearArreglo( jugadoresObj: Object) {
 
     this.jugadores.push(jugador);
   });
-
 }
 
 ActualizarJugador() {
@@ -126,28 +129,32 @@ LimpiarArreglo() {
   this.jugadores.splice(0);
 }
 
+DescargarPdf() {
 
-  // TraerTodos(){
-  //   // alert("totos");
-  //   this.miJugadoresServicio.traertodos('jugadores/', 'todos').then(data => {
-  //     // console.info("jugadores listado",(data));
-  //     this.listado = data;
+  var doc = new jsPDF() as jsPDFWithPlugin;
 
-  //   });
-  // }
-  // TraerGanadores(){
-  //   this.miJugadoresServicio.traertodos('jugadores/', 'ganadores').then(data => {
-  //     // console.info("jugadores listado",(data));
-  //     this.listado = data;
+  interface jsPDFWithPlugin extends jsPDF {
+    autoTable: (options: UserOptions) => jsPDF;
+  }   
+  var fila = 10;
+  var columna = 15;
 
-  //   });
-  // }
-  // TraerPerdedores(){
-  //   this.miJugadoresServicio.traertodos('jugadores/', 'perdedores').then(data => {
-  //     // console.info("jugadores listado",(data));
-  //     this.listado = data;
+  Object.keys ( this.jugadores ).forEach( key => {
+    const jugador: Jugador = this.jugadores[key];
 
-  //   });
-  // }
+    doc.text(JSON.stringify(jugador), fila, columna);
+    columna += 15;
+
+    doc.autoTable({
+      head: [['Apellido', 'Email', 'Nombre', 'Puntaje']],
+      body: [[jugador.apellido, jugador.email, jugador.nombre, jugador.puntaje]]
+    })
+  });
+
+  doc.save('jugadores.pdf');
+  
+ 
+   
+}
 
 }

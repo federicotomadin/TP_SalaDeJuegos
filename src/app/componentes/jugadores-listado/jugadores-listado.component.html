@@ -1,6 +1,9 @@
 <app-menu>
 </app-menu><br>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
+
+
 <div class="container">
 
     <button type="button" class="btn btn-primary btn-lg btn-block" (click)="CrearJugadores()">Crear Cliente</button><br>
@@ -46,5 +49,8 @@
                 <td>{{jugador.puntaje}}</td>
             </tr>
         </tbody>
-    </table>
+    </table><br>
+
+    <button type="button" class="btn btn-danger btn-lg" (click)="DescargarPdf()">Descargar como PDF</button><br>
+
 </div>
