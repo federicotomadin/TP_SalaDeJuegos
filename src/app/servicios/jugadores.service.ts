@@ -36,8 +36,8 @@ GetJugadores() {
 
 ActualizarPuntaje(puntaje: string, email: string) {
 
-  var usuario: Jugador;
-  var  puntajeNuevo: number;
+  let usuario: Jugador;
+  let  puntajeNuevo: number;
  return  this.http.get(`${this.url}/jugadores.json`)
   .subscribe(resp => {
     Object.keys (resp).forEach(key => {
@@ -45,9 +45,9 @@ ActualizarPuntaje(puntaje: string, email: string) {
 
         if(jugador['email'] == email) {
    
-          puntajeNuevo = parseInt(puntaje) + parseInt(jugador.puntaje);
+          puntajeNuevo = parseInt(puntaje, 0) + parseInt(jugador.puntaje, 0);
 
-          usuario = new Jugador(jugador.email,jugador.nombre, jugador.apellido, jugador.password, String(puntajeNuevo));
+          usuario = new Jugador(jugador.email, jugador.nombre, jugador.apellido, jugador.password, String(puntajeNuevo));
 
           this.http.put(`${this.url}/jugadores/${key}.json`, usuario)
           .subscribe(resp => 
