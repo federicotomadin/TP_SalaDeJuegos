@@ -10,7 +10,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import Swal from 'sweetalert2';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { UserOptions } from 'jspdf-autotable';
+import { UserOptions, MarginPadding } from 'jspdf-autotable';
 
 
 
@@ -131,30 +131,40 @@ LimpiarArreglo() {
 
 DescargarPdf() {
 
-  var doc = new jsPDF() as jsPDFWithPlugin;
+  var doc = new jsPDF("p", "pt") as jsPDFWithPlugin;
 
   interface jsPDFWithPlugin extends jsPDF {
     autoTable: (options: UserOptions) => jsPDF;
   }   
-  var fila = 10;
-  var columna = 15;
+
+  // doc.autoTable({
+  //   head: [['Nombre','Apellido','Puntaje']],
+  //   body: [[]]
+  // });
 
   Object.keys ( this.jugadores ).forEach( key => {
-    const jugador: Jugador = this.jugadores[key];
+  const jugador: Jugador = this.jugadores[key];
 
-    doc.text(JSON.stringify(jugador), fila, columna);
-    columna += 15;
+  var columns = [ 
+    { tittle: 'Nombre', dataKey: 'nombre'},
+    { tittle: 'Apellido', dataKey: 'apellido'},
+    { tittle: 'Puntaje', dataKey: 'puntaje'}]
 
-    doc.autoTable({
-      head: [['Apellido', 'Email', 'Nombre', 'Puntaje']],
-      body: [[jugador.apellido, jugador.email, jugador.nombre, jugador.puntaje]]
-    })
-  });
+var rows = [
+  { nombre : jugador.nombre},
+  { apellido : jugador.apellido},
+  { puntaje : jugador.puntaje}
+]
 
-  doc.save('jugadores.pdf');
-  
  
-   
-}
+    doc.autoTable(columns, rows, {  
+      // styles : {halign: 'left', valign: 'bottom', cellWidth: 'auto'}, 
+      // head: [['Nombre', 'Apellido', 'Puntaje']],
+      // body: [[jugador.nombre, jugador.apellido, jugador.puntaje]]
+    });
 
+
+  });
+  doc.save('jugadores.pdf');
+}
 }
