@@ -16,7 +16,13 @@
                 <button type="submit">Ingresar</button><br>
                 <app-mi-captcha (captcha)="ReconociendoCaptcha($event)"></app-mi-captcha>
 
+                
+
                 <input type="checkbox" [(ngModel)]="recordarme" name="remember-me"> Recordar mis datos <br>
+            </div>
+
+            <div>
+                <qr-code [value]="vCardData" [size]="200"></qr-code>
             </div>
 
             <div class="container" style="background-color:#f1f1f1">

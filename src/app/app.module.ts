@@ -41,6 +41,8 @@ import { SexoPipe } from './pipes/sexo.pipe';
 import { CrucigramaDigitalComponent } from './componentes/crucigrama-digital/crucigrama-digital.component';
 import { AuthService } from './servicios/auth.service';
 import { ClienteService } from './servicios/cliente.service';
+import { QRCodeModule } from 'angular2-qrcode';
+
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule, AngularFireUploadTask } from '@angular/fire/storage';
@@ -71,7 +73,7 @@ import { UtilsModule } from './utils/utils.module';
     JugadoresListadoComponent,
     InputJugadoresComponent,
     SexoPipe,
-    CrucigramaDigitalComponent
+    CrucigramaDigitalComponent  
   ],
   imports: [
     BrowserModule,
@@ -81,7 +83,8 @@ import { UtilsModule } from './utils/utils.module';
     HttpModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    QRCodeModule
     // RouterModule.forRoot([])
     // NgbModule.forRoot(MiRuteo),
     // importo el ruteo

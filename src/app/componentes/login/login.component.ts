@@ -5,8 +5,6 @@ import { NgForm } from '@angular/forms';
 import { Jugador } from '../../clases/jugador';
 import { AuthService } from '../../servicios/auth.service';
 import Swal from 'sweetalert2';
-import {Subscription} from 'rxjs';
-
 
 
 @Component({
@@ -17,27 +15,25 @@ import {Subscription} from 'rxjs';
 export class LoginComponent implements OnInit {
 
   recordarme = false;
-  private subscription: Subscription;
-  usuario = '';
-  clave = '';
-  progreso: number;
-  progresoMensaje = 'esperando...';
-  logeando = true;
-  ProgresoDeAncho: string;
   unJugador: Jugador;
   captchaLogin = 'vacio';
+  vCardData: string = '';
+
+  
 
   ReconociendoCaptcha(cap: string) {
     this.captchaLogin = cap;
   }
 
-
   constructor(private auth: AuthService,
     private route: ActivatedRoute,
     private router: Router) {
-      this.progreso = 0;
-      this.ProgresoDeAncho = '0%';
 
+    this.vCardData = `BEGIN:VCARD
+    VERSION:3.0
+    EMAIL:email
+    FN:fn
+    ORG:org`
   }
 
   ngOnInit() {

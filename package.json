@@ -38,6 +38,7 @@
         "ng-recaptcha": "^5.0.0",
         "ngx-bootstrap": "^5.1.2",
         "ngx-bootstrap-modal": "^2.0.1",
+        "ngx-qrcode2": "0.0.9",
         "nodemon": "^1.19.4",
         "recaptcha": "^1.2.1",
         "recaptcha-v2": "^0.1.3",
