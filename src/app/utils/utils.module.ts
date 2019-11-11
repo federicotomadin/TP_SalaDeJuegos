@@ -1,15 +1,19 @@
-import { MiCaptchaModule } from './mi-captcha/mi-captcha.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { MiCaptchaComponent } from './mi-captcha/mi-captcha.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 
 
 @NgModule({
-  declarations: [],
-  exports: [ MiCaptchaModule ],
+  declarations: [MiCaptchaComponent],
+  exports: [ MiCaptchaComponent ],
   imports: [
-    CommonModule, MiCaptchaModule
+    CommonModule,
+    RecaptchaModule.forRoot()
   ]
 })
-export class UtilsModule { }
+export class UtilsModule {
+
+
+ }

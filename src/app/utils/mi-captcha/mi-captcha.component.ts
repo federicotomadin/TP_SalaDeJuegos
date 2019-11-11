@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output} from '@angular/core';
+import { EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-mi-captcha',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mi-captcha.component.css']
 })
 export class MiCaptchaComponent implements OnInit {
+  @Output() captcha = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  resolved(captchaResponse: string) {
+    this.captcha.emit(captchaResponse);
+    // console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
 
 }

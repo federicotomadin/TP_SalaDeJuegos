@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { UserOptions, MarginPadding } from 'jspdf-autotable';
+// declare let jsPDF: any;
 
 
 
@@ -131,40 +132,13 @@ LimpiarArreglo() {
 
 DescargarPdf() {
 
-  var doc = new jsPDF("p", "pt") as jsPDFWithPlugin;
+  const doc = new jsPDF('p', 'pt') as JsPDFWithPlugin;
 
-  interface jsPDFWithPlugin extends jsPDF {
+  interface JsPDFWithPlugin extends jsPDF {
     autoTable: (options: UserOptions) => jsPDF;
-  }   
+  }
 
-  // doc.autoTable({
-  //   head: [['Nombre','Apellido','Puntaje']],
-  //   body: [[]]
-  // });
-
-  Object.keys ( this.jugadores ).forEach( key => {
-  const jugador: Jugador = this.jugadores[key];
-
-  var columns = [ 
-    { tittle: 'Nombre', dataKey: 'nombre'},
-    { tittle: 'Apellido', dataKey: 'apellido'},
-    { tittle: 'Puntaje', dataKey: 'puntaje'}]
-
-var rows = [
-  { nombre : jugador.nombre},
-  { apellido : jugador.apellido},
-  { puntaje : jugador.puntaje}
-]
-
- 
-    doc.autoTable(columns, rows, {  
-      // styles : {halign: 'left', valign: 'bottom', cellWidth: 'auto'}, 
-      // head: [['Nombre', 'Apellido', 'Puntaje']],
-      // body: [[jugador.nombre, jugador.apellido, jugador.puntaje]]
-    });
-
-
-  });
+  doc.autoTable({html: '#miTabla'});
   doc.save('jugadores.pdf');
 }
 }

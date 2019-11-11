@@ -45,7 +45,7 @@ import { ClienteService } from './servicios/cliente.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule, AngularFireUploadTask } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
-
+import { UtilsModule } from './utils/utils.module';
 
 @NgModule({
   declarations: [
@@ -77,6 +77,7 @@ import { environment } from '../environments/environment';
     BrowserModule,
     FormsModule,
     RuteandoModule,
+    UtilsModule,
     HttpModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),

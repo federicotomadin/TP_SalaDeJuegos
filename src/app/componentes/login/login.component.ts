@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -6,6 +6,7 @@ import { Jugador } from '../../clases/jugador';
 import { AuthService } from '../../servicios/auth.service';
 import Swal from 'sweetalert2';
 import {Subscription} from 'rxjs';
+
 
 
 @Component({
@@ -18,13 +19,17 @@ export class LoginComponent implements OnInit {
   recordarme = false;
   private subscription: Subscription;
   usuario = '';
-  clave= '';
+  clave = '';
   progreso: number;
-  progresoMensaje= 'esperando...';
-  logeando= true;
+  progresoMensaje = 'esperando...';
+  logeando = true;
   ProgresoDeAncho: string;
-
   unJugador: Jugador;
+  captchaLogin = 'vacio';
+
+  ReconociendoCaptcha(cap: string) {
+    this.captchaLogin = cap;
+  }
 
 
   constructor(private auth: AuthService,
@@ -46,7 +51,20 @@ export class LoginComponent implements OnInit {
 
   Login(form: NgForm) {
 
-    if (form.invalid) { return; }
+        if (form.invalid) { return; }
+    if (this.captchaLogin === 'vacio') {
+
+      setTimeout(function() {
+        Swal.fire({
+        allowOutsideClick: false,
+        type: 'error',
+        text: 'Captcha no validado',
+      });
+     }, 200);
+     Swal.close();
+      this.router.navigate(['/Login']);
+      return;
+    }
 
    Swal.fire({
      allowOutsideClick: false,
