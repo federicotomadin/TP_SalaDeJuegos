@@ -17,9 +17,9 @@ export class LoginComponent implements OnInit {
   recordarme = false;
   unJugador: Jugador;
   captchaLogin = 'vacio';
-  vCardData: string = '';
+  vCardData = 'la concha';
 
-  
+
 
   ReconociendoCaptcha(cap: string) {
     this.captchaLogin = cap;
@@ -29,12 +29,25 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router) {
 
-    this.vCardData = `BEGIN:VCARD
-    VERSION:3.0
-    EMAIL:email
-    FN:fn
-    ORG:org`
+      const name = 'fede';
+      const surname = 'tomadin';
+      const org = 'org';
+      const url = 'url';
+      const email = 'email';
+      const tel = 5454445;
+
+      this.vCardData = `BEGIN:VCARD
+      VERSION:3.0
+      N:${name};${surname}
+      FN:${name};${surname}
+      ORG:${org}
+      URL:${url}
+      EMAIL:${email}
+      TEL;TYPE:voce,work,pref:${tel}
+      END:VCARD`;
+
   }
+
 
   ngOnInit() {
     this.unJugador = new Jugador();

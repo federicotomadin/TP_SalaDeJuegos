@@ -40,6 +40,10 @@
                 <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger animated fadeIn">La contraseña es obligatoria, minimo 6 caracteres</span>
                 <input type="password" placeholder="Acá la clave" [(ngModel)]="unJugador.password" name="password" minlength="6" required>
 
+                <input style="display: none;" type="file" (change)="onFileSelectd($event)" class="col-md-6" name="fileInput" #fileInput/>
+                <button type="button" (click)="fileInput.click()" class="btn btn-secondary col-md-3 btn-lg">Subir Foto</button><br>
+                <a href="{{fotoSubida}}" target="_blank" [(ngModel)]="name" ngDefaultControl>Foto Subida</a><br>
+
                 <!-- <label><b>Repita la clave</b></label><br>
                 <span *ngIf="f.submitted && f.controls['psw-repeat'].errors" class="text-danger animated fadeIn">La contraseña tiene que repetirse</span>
                 <input type="password" placeholder="Acá repetí la misma clave  de arriba" [(ngModel)]="unJugador.pass" name="psw-repeat" required> -->

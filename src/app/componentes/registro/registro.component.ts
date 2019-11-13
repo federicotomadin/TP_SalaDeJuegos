@@ -6,8 +6,7 @@ import { AuthService } from '../../servicios/auth.service';
 import Swal from 'sweetalert2';
 import { Router} from '@angular/router';
 import { JugadoresService } from '../../servicios/jugadores.service';
-import { Observable } from 'rxjs/Observable';
-import { resolve } from 'url';
+import { FirebaseStorageService } from '../../servicios/firebase-storage.service';
 
 
 
@@ -26,22 +25,28 @@ export class RegistroComponent implements OnInit {
   usuario = '';
   name = '';
   psw = '';
+  urlPublica: string;
 
   resultado: string;
   // private MiHttpService: MiHttpService
-  constructor(private auth: AuthService, private router: Router, private servicioJugadores: JugadoresService) { }
+  constructor(private auth: AuthService, private router: Router,
+    private serviceFireStorage: FirebaseStorageService, private servicioJugadores: JugadoresService) { }
 
   ngOnInit() {
     this.unJugador = new Jugador();
   }
+
+//--------------------------------USUARIO NUEVO--------------------------------------
 
   RegistrarUsuario() {
   this.unJugador = new Jugador();
   this.unJugador.puntaje = '0';
   }
 
-  ngSubmit(form: NgForm) {
 
+  //--------------------------------USUARIO NUEVO--------------------------------------
+
+  ngSubmit(form: NgForm) {
 
   if (form.invalid) { return; }
 
@@ -79,4 +84,28 @@ export class RegistroComponent implements OnInit {
   });
 
   }
+
+//-------------------------------- SUBIR FOTO --------------------------------------
+
+
+  public onFileSelectd($event) {
+
+    if ($event.target.files.length === 1) {
+      this.serviceFireStorage.referenciaCloudStorage($event.target.files[0].name).getDownloadURL()
+       .subscribe(resp  => {
+         this.urlPublica = resp;
+
+       Swal.fire({
+          allowOutsideClick: false,
+          type: 'info',
+          text: 'Imagen cargada con exito'
+});
+      }, (error) => {
+        console.error(error);
+      });
+
+       this.serviceFireStorage.tareaCloudStorage($event.target.files[0].name, $event.target.files[0]);
+   }
+
+}
 }

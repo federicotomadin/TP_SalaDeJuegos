@@ -33,7 +33,6 @@ import { JuegosComponent } from './componentes/juegos/juegos.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { MenuCardComponent } from './componentes/menu-card/menu-card.component';
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
-import { QuienSoyComponent } from './componentes/quien-soy/quien-soy.component';
 import { AnagramaComponent } from './componentes/anagrama/anagrama.component';
 import { ListadoDePaisesComponent } from './componentes/listado-de-paises/listado-de-paises.component';
 import { InputJugadoresComponent } from './componentes/input-jugadores/input-jugadores.component';
@@ -67,13 +66,12 @@ import { UtilsModule } from './utils/utils.module';
     RegistroComponent,
     MenuCardComponent,
     CabeceraComponent,
-    QuienSoyComponent,
     AnagramaComponent,
     ListadoDePaisesComponent,
     JugadoresListadoComponent,
     InputJugadoresComponent,
     SexoPipe,
-    CrucigramaDigitalComponent  
+    CrucigramaDigitalComponent
   ],
   imports: [
     BrowserModule,

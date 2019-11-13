@@ -60,15 +60,7 @@ export class JugadoresListadoComponent implements OnInit {
         });
 
          this.serviceFireStorage.tareaCloudStorage($event.target.files[0].name, $event.target.files[0]);
-
-
-      //   this.serviceJugadores.subirArchivo($event.target.files[0]).subscribe(response => {
-      //         console.log(response);
-      //     },
-      //     error => {
-      //         console.error(error);
-      //     });
-      // }
+         
   }
 
 }
