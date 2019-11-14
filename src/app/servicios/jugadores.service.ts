@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 import { Observable, timer } from 'rxjs';
 import { RequestOptions } from '@angular/http';
 import Swal from 'sweetalert2';
+import { FirebaseApp } from '@angular/fire';
 
 
 @Injectable()
@@ -32,6 +33,8 @@ CrearJugador(jugador: Jugador) {
 
 GetJugadores() {
    return this.http.get(`${this.url}/jugadores.json`);
+
+
 }
 
 ActualizarPuntaje(puntaje: string, email: string) {

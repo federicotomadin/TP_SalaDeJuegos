@@ -2,8 +2,11 @@ import { Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase';
+
 
 import { Jugador } from '../clases/jugador';
+import { Subscriber } from 'rxjs';
 
 
 @Injectable()
@@ -26,6 +29,20 @@ export class AuthService {
   }
 
   Login(usuario: Jugador) {
+
+
+    
+    firebase.auth().signInWithEmailAndPassword(usuario.email, usuario.password).then(
+    resp => {
+      firebase.auth().currentUser.getIdToken().then(
+       token => {
+         this.userToken = token;
+         this.route.navigate(['/Principal']);
+       } 
+
+      )
+    })
+    
 
     const authData = {
       ...usuario,
@@ -73,10 +90,16 @@ export class AuthService {
     );
   }
 
-  private GuardarToken(idToken: string) {
+  ObtenerToken()
+  {
+    firebase.auth().currentUser.getIdToken().then(
+      token => {
+       return  this.userToken = token;      
+      } 
 
-    this.userToken = idToken;
-    localStorage.setItem('token', this.userToken);
+  }
+
+  private GuardarToken(idToken: string) {
 
     const hoy = new Date();
     hoy.setSeconds( 3600 );
