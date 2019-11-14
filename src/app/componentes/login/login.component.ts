@@ -29,22 +29,16 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router) {
 
-      const name = 'fede';
-      const surname = 'tomadin';
-      const org = 'org';
-      const url = 'url';
-      const email = 'email';
-      const tel = 5454445;
-
-      this.vCardData = `BEGIN:VCARD
-      VERSION:3.0
-      N:${name};${surname}
-      FN:${name};${surname}
-      ORG:${org}
-      URL:${url}
-      EMAIL:${email}
-      TEL;TYPE:voce,work,pref:${tel}
-      END:VCARD`;
+      
+      let o = {
+         name: 'fede',
+       surname: 'tomadin',
+       org: 'org',
+       url: 'url',
+       email: 'email',
+       tel: 5454445,
+      }
+      this.vCardData = JSON.stringify(o);
 
   }
 
